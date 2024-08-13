@@ -1,6 +1,24 @@
+enum OperationType {
+    BUY
+    SELL
+}
+
 type Operation {
     asset: Asset!
     price: Float!
     quantity: Float!
     createdAt: String!
+    type: OperationType!
+}
+
+input OperationInput {
+    assetId: ID!
+    price: Float!
+    quantity: Float!
+    type: OperationType!
+}
+
+input RegisterOperationInput {
+    operation: OperationInput!
+    portfolioId: ID!
 }
