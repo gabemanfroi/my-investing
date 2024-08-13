@@ -1,0 +1,6 @@
+type Operation {
+    asset: Asset!
+    price: Float!
+    quantity: Float!
+    createdAt: String!
+}

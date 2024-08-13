@@ -1,7 +1,8 @@
 import { Sequelize } from 'sequelize-typescript';
 import { Asset, AssetClass } from 'src/assets/asset.entity';
 import { User } from 'src/users/user.entity';
-import { Portfolio, PortfolioAsset } from 'src/portfolio/portfolio.entity';
+import { Portfolio } from 'src/portfolios/portfolio.entity';
+import { Operation } from 'src/operations/operation.entity';
 
 export const databaseProviders = [
   {
@@ -18,7 +19,7 @@ export const databaseProviders = [
           underscored: true,
         },
       });
-      sequelize.addModels([AssetClass, Asset, User, Portfolio, PortfolioAsset]);
+      sequelize.addModels([AssetClass, Asset, User, Portfolio, Operation]);
       await sequelize.sync();
       return sequelize;
     },

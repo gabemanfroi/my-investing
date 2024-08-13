@@ -1,0 +1,3 @@
+type Mutation {
+    CreatePortfolio(userId: Int!): Portfolio!
+}

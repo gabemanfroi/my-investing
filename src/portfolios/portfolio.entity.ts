@@ -8,6 +8,7 @@ import {
 } from 'sequelize-typescript';
 import { User } from 'src/users/user.entity';
 import { Asset } from 'src/assets/asset.entity';
+import { Operation } from 'src/operations/operation.entity';
 
 @Table
 export class Portfolio extends Model {
@@ -18,26 +19,6 @@ export class Portfolio extends Model {
   @BelongsTo(() => User)
   user: User;
 
-  @BelongsToMany(() => Asset, () => PortfolioAsset)
+  @BelongsToMany(() => Asset, () => Operation)
   assets: Asset[];
-}
-
-@Table
-export class PortfolioAsset extends Model {
-  @ForeignKey(() => Portfolio)
-  @Column
-  portfolioId: number;
-
-  @ForeignKey(() => Asset)
-  @Column
-  assetId: number;
-
-  @Column
-  quantity: number;
-
-  @BelongsTo(() => Portfolio)
-  portfolio: Portfolio;
-
-  @BelongsTo(() => Asset)
-  asset: Asset;
 }

@@ -7,7 +7,8 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
-import { Portfolio, PortfolioAsset } from 'src/portfolio/portfolio.entity';
+import { Portfolio } from 'src/portfolios/portfolio.entity';
+import { Operation } from 'src/operations/operation.entity';
 
 @Table
 export class AssetClass extends Model {
@@ -30,6 +31,6 @@ export class Asset extends Model {
   @BelongsTo(() => AssetClass)
   class: AssetClass;
 
-  @BelongsToMany(() => Portfolio, () => PortfolioAsset)
+  @BelongsToMany(() => Portfolio, () => Operation)
   portfolios: Portfolio[];
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class PortfolioService {
+export class PortfoliosService {
   getUserPortfolio(userId: number) {
     return Promise.resolve(userId);
   }

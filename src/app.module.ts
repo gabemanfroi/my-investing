@@ -8,7 +8,8 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { UsersController } from './users/users.controller';
 import { UsersService } from './users/users.service';
 import { UsersModule } from './users/users.module';
-import { PortfolioModule } from './portfolio/portfolio.module';
+import { PortfoliosModule } from 'src/portfolios/portfolios.module';
+import { OperationsModule } from './operations/operations.module';
 import * as path from 'node:path';
 
 @Module({
@@ -25,7 +26,8 @@ import * as path from 'node:path';
       },
     }),
     UsersModule,
-    PortfolioModule,
+    PortfoliosModule,
+    OperationsModule,
   ],
   controllers: [AppController, UsersController],
   providers: [AppService, UsersService],
