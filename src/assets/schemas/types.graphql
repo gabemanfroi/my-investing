@@ -9,3 +9,7 @@ type Asset {
     class: AssetClass!
 }
 
+input CreateAssetInput {
+    ticker: String!
+    assetClassId: ID!
+}

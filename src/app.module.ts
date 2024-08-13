@@ -22,7 +22,7 @@ import * as path from 'node:path';
       typePaths: ['./**/*.graphql'],
       definitions: {
         path: path.join(process.cwd(), 'src/graphql.ts'),
-        outputAs: 'class',
+        outputAs: 'interface',
       },
     }),
     UsersModule,

@@ -1,8 +1,8 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
 import { PortfoliosService } from 'src/portfolios/portfolios.service';
 
-@Resolver('Portfolio')
-export class PortfolioResolver {
+@Resolver('Portfolios')
+export class PortfoliosResolver {
   constructor(private readonly portfolioService: PortfoliosService) {}
 
   @Query('GetUserPortfolio')

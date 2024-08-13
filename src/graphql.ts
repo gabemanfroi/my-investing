@@ -8,19 +8,59 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export class AssetClass {
+export enum OperationType {
+    BUY = "BUY",
+    SELL = "SELL"
+}
+
+export interface CreateAssetInput {
+    ticker: string;
+    assetClassId: string;
+}
+
+export interface OperationInput {
+    assetId: string;
+    price: number;
+    quantity: number;
+    type: OperationType;
+}
+
+export interface RegisterOperationInput {
+    operation: OperationInput;
+    portfolioId: string;
+}
+
+export interface IMutation {
+    CreateAsset(createAssetInput?: Nullable<CreateAssetInput>): boolean | Promise<boolean>;
+    RegisterOperation(registerOperationInput?: Nullable<RegisterOperationInput>): boolean | Promise<boolean>;
+    CreatePortfolio(userId: number): Portfolio | Promise<Portfolio>;
+}
+
+export interface AssetClass {
     id: string;
     name: string;
 }
 
-export class Asset {
+export interface Asset {
     id: string;
     ticker: string;
     class: AssetClass;
 }
 
-export abstract class IQuery {
-    abstract GetUserPortfolio(userId: number): Asset[] | Promise<Asset[]>;
+export interface Operation {
+    asset: Asset;
+    price: number;
+    quantity: number;
+    createdAt: string;
+    type: OperationType;
+}
+
+export interface IQuery {
+    GetUserPortfolio(userId: number): Portfolio | Promise<Portfolio>;
+}
+
+export interface Portfolio {
+    assets: Asset[];
 }
 
 type Nullable<T> = T | null;

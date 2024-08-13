@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Asset } from 'src/assets/asset.entity';
+import { CreateAssetInput } from 'src/graphql';
 
 @Injectable()
 export class AssetsService {
@@ -8,7 +9,7 @@ export class AssetsService {
     private readonly assetsRepository: typeof Asset,
   ) {}
 
-  getUserAssets(userId: number) {
-    return this.assetsRepository.findAll();
+  createAsset(createAssetInput: CreateAssetInput) {
+    return Promise.resolve(createAssetInput);
   }
 }
