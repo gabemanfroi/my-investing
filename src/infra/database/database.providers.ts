@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 import { Asset, AssetClass } from 'src/assets/asset.entity';
+import { User } from 'src/users/user.entity';
 
 export const databaseProviders = [
   {
@@ -13,7 +14,7 @@ export const databaseProviders = [
         password: 'postgres',
         database: 'nest_db',
       });
-      sequelize.addModels([AssetClass, Asset]);
+      sequelize.addModels([AssetClass, Asset, User]);
       await sequelize.sync();
       return sequelize;
     },
