@@ -8,7 +8,7 @@ export class AssetsService {
     private readonly assetsRepository: typeof Asset,
   ) {}
 
-  getAssetsByUser() {
+  getUserAssets(userId: number) {
     return this.assetsRepository.findAll();
   }
 }

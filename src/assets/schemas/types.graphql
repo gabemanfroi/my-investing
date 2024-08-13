@@ -1,0 +1,11 @@
+type AssetClass {
+    id: ID!
+    name: String!
+}
+
+type Asset {
+    id: ID!
+    ticker: String!
+    class: AssetClass!
+}
+

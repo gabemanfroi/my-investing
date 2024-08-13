@@ -7,6 +7,6 @@ export class AssetsController {
 
   @Get('get-by-user')
   getByUser() {
-    return this.assetsService.getAssetsByUser();
+    return this.assetsService.getUserAssets(1);
   }
 }
