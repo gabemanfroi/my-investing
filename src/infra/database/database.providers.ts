@@ -6,12 +6,12 @@ export const databaseProviders = [
     provide: 'SEQUELIZE',
     useFactory: async () => {
       const sequelize = new Sequelize({
-        dialect: 'mysql',
-        host: 'localhost',
-        port: 3306,
-        username: 'root',
-        password: 'password',
-        database: 'nest',
+        dialect: 'postgres',
+        host: 'timescaledb',
+        port: 5432,
+        username: 'postgres',
+        password: 'postgres',
+        database: 'nest_db',
       });
       sequelize.addModels([AssetClass, Asset]);
       await sequelize.sync();

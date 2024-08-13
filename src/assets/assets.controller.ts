@@ -5,7 +5,7 @@ import { AssetsService } from 'src/assets/assets.service';
 export class AssetsController {
   constructor(private readonly assetsService: AssetsService) {}
 
-  @Get()
+  @Get('get-by-user')
   getByUser() {
     return this.assetsService.getAssetsByUser();
   }
