@@ -5,7 +5,7 @@ import { AssetsService } from 'src/assets/assets.service';
 export class AssetsResolver {
   constructor(private readonly assetsService: AssetsService) {}
 
-  @Query('getUserAssets')
+  @Query('GetUserAssets')
   async getUserAssets(@Args('id') id: number) {
     return this.assetsService.getUserAssets(id);
   }
