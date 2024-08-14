@@ -5,11 +5,10 @@ import { AssetsModule } from './assets/assets.module';
 import { DatabaseModule } from 'src/infra/database/database.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { UsersController } from './users/users.controller';
-import { UsersService } from './users/users.service';
 import { UsersModule } from './users/users.module';
 import { PortfoliosModule } from 'src/portfolios/portfolios.module';
 import { OperationsModule } from './operations/operations.module';
+import { AuthModule } from './auth/auth.module';
 import * as path from 'node:path';
 
 @Module({
@@ -28,8 +27,9 @@ import * as path from 'node:path';
     UsersModule,
     PortfoliosModule,
     OperationsModule,
+    AuthModule,
   ],
-  controllers: [AppController, UsersController],
-  providers: [AppService, UsersService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

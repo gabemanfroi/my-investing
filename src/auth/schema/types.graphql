@@ -1,0 +1,19 @@
+input LoginRequest {
+    email: String!
+    password: String!
+}
+
+type LoginResponse {
+    token: String!
+}
+
+input RegisterRequest {
+    email: String!
+    password: String!
+    firstName: String!
+    lastName: String!
+}
+
+type RegisterResponse {
+    token: String!
+}

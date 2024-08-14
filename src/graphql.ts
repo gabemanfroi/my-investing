@@ -22,6 +22,18 @@ export interface CreateAssetClassInput {
     name: string;
 }
 
+export interface LoginRequest {
+    email: string;
+    password: string;
+}
+
+export interface RegisterRequest {
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+}
+
 export interface OperationInput {
     assetId: string;
     price: number;
@@ -41,6 +53,8 @@ export interface GetUserPortfolioRequest {
 export interface IMutation {
     CreateAssetClass(createAssetClassInput?: Nullable<CreateAssetClassInput>): boolean | Promise<boolean>;
     CreateAsset(createAssetInput?: Nullable<CreateAssetInput>): boolean | Promise<boolean>;
+    Login(loginRequest: LoginRequest): LoginResponse | Promise<LoginResponse>;
+    Register(registerRequest: RegisterRequest): RegisterResponse | Promise<RegisterResponse>;
     RegisterOperation(registerOperationInput?: Nullable<RegisterOperationInput>): boolean | Promise<boolean>;
     CreatePortfolio(userId: number): Portfolio | Promise<Portfolio>;
 }
@@ -54,6 +68,14 @@ export interface Asset {
     id: string;
     ticker: string;
     class: AssetClass;
+}
+
+export interface LoginResponse {
+    token: string;
+}
+
+export interface RegisterResponse {
+    token: string;
 }
 
 export interface Operation {

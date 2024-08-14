@@ -1,7 +1,7 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { PortfoliosService } from 'src/portfolios/portfolios.service';
-import { PortfoliosMappers } from 'src/portfolios/portfolios.mappers';
 import { GetUserPortfolioRequest } from 'src/graphql';
+import { ReadPortfolioDto } from 'src/portfolios/dto/read-portfolio.dto';
 
 @Resolver('Portfolios')
 export class PortfoliosResolver {
@@ -16,7 +16,7 @@ export class PortfoliosResolver {
       getUserPortfolioRequest.userId,
     );
 
-    return PortfoliosMappers.fromReadDtoToGetUserPortfolioResponse(response);
+    return ReadPortfolioDto.toGetUserPortfolioResponse(response);
   }
 
   @Mutation('CreatePortfolio')

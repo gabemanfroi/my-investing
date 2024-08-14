@@ -1,3 +1,3 @@
 extend type Query {
-    GetUserPortfolio(getUserPortfolioRequest: GetUserPortfolioRequest): GetUserPortfolioResponse!
+    getUserPortfolio(getUserPortfolioRequest: GetUserPortfolioRequest): GetUserPortfolioResponse!
 }

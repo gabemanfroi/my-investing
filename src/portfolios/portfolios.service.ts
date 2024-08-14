@@ -4,7 +4,6 @@ import { Asset, AssetClass } from 'src/assets/asset.entity';
 import { Sequelize } from 'sequelize-typescript';
 import { Operation } from 'src/operations/operation.entity';
 import { ReadPortfolioDto } from 'src/portfolios/dto/read-portfolio.dto';
-import { PortfoliosMappers } from 'src/portfolios/portfolios.mappers';
 
 @Injectable()
 export class PortfoliosService {
@@ -26,7 +25,7 @@ export class PortfoliosService {
       ],
     });
 
-    return PortfoliosMappers.fromModelToReadPortfolioDto(portfolio);
+    return ReadPortfolioDto.fromModel(portfolio);
   }
 
   async createPortfolio(userId: number) {
