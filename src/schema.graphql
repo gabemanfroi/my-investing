@@ -3,7 +3,7 @@ schema {
     mutation: Mutation
 }
 
-type Query {}
+type Query
 
 
-type Mutation {}
+type Mutation
