@@ -17,3 +17,19 @@ input CreateAssetInput {
 input CreateAssetClassInput {
     name: String!
 }
+
+input ListAssetsRequest {
+    query: String!
+}
+
+type ListAssetsResponse {
+    assets: [Asset]!
+}
+
+input ListAssetsClassesRequest {
+    query: String!
+}
+
+type ListAssetsClassesResponse {
+    assetClasses: [AssetClass]!
+}

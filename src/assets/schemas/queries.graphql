@@ -1,0 +1,4 @@
+extend type Query {
+    listAssets(listAssetsRequest: ListAssetsRequest): ListAssetsResponse
+    listAssetsClasses(listAssetsClassesRequest: ListAssetsClassesRequest!): ListAssetsClassesResponse
+}

@@ -22,6 +22,14 @@ export interface CreateAssetClassInput {
     name: string;
 }
 
+export interface ListAssetsRequest {
+    query: string;
+}
+
+export interface ListAssetsClassesRequest {
+    query: string;
+}
+
 export interface LoginRequest {
     email: string;
     password: string;
@@ -59,6 +67,12 @@ export interface IMutation {
     createPortfolio(): Portfolio | Promise<Portfolio>;
 }
 
+export interface IQuery {
+    listAssets(listAssetsRequest?: Nullable<ListAssetsRequest>): Nullable<ListAssetsResponse> | Promise<Nullable<ListAssetsResponse>>;
+    listAssetsClasses(listAssetsClassesRequest: ListAssetsClassesRequest): Nullable<ListAssetsClassesResponse> | Promise<Nullable<ListAssetsClassesResponse>>;
+    getUserPortfolio(getUserPortfolioRequest?: Nullable<GetUserPortfolioRequest>): GetUserPortfolioResponse | Promise<GetUserPortfolioResponse>;
+}
+
 export interface AssetClass {
     id: string;
     name: string;
@@ -68,6 +82,14 @@ export interface Asset {
     id: string;
     ticker: string;
     class: AssetClass;
+}
+
+export interface ListAssetsResponse {
+    assets: Nullable<Asset>[];
+}
+
+export interface ListAssetsClassesResponse {
+    assetClasses: Nullable<AssetClass>[];
 }
 
 export interface LoginResponse {
@@ -84,10 +106,6 @@ export interface Operation {
     quantity: number;
     createdAt: string;
     type: OperationType;
-}
-
-export interface IQuery {
-    getUserPortfolio(getUserPortfolioRequest?: Nullable<GetUserPortfolioRequest>): GetUserPortfolioResponse | Promise<GetUserPortfolioResponse>;
 }
 
 export interface PortfolioAsset {

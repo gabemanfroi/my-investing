@@ -4,6 +4,8 @@ import { Op } from 'sequelize';
 import { CreateAssetClassDto } from 'src/assets/dto/create-asset-class.dto';
 import { CreateAssetDto } from 'src/assets/dto/create-asset.dto';
 import { Sequelize } from 'sequelize-typescript';
+import { ReadAssetDto } from 'src/assets/dto/read-asset.dto';
+import { ReadAssetClassDto } from 'src/assets/dto/read-asset-class.dto';
 
 @Injectable()
 export class AssetsService {
@@ -58,5 +60,30 @@ export class AssetsService {
 
       return !!created;
     });
+  }
+
+  async listAssets(query: string) {
+    const assets = await this.assetsRepository.findAll({
+      where: {
+        ticker: {
+          [Op.iLike]: `%${query.toLowerCase()}%`,
+        },
+      },
+      include: [AssetClass],
+    });
+
+    return ReadAssetDto.manyFromModel(assets);
+  }
+
+  async listAssetsClasses(query: string) {
+    const classes = await this.assetsClassRepository.findAll({
+      where: {
+        name: {
+          [Op.iLike]: `%${query.toLowerCase()}%`,
+        },
+      },
+    });
+
+    return ReadAssetClassDto.manyFromModel(classes);
   }
 }
