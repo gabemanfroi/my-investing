@@ -10,8 +10,8 @@ import { Asset } from 'src/assets/asset.entity';
 import { Portfolio } from 'src/portfolios/portfolio.entity';
 
 export enum OperationType {
-  BUY = 'buy',
-  SELL = 'sell',
+  BUY = 'BUY',
+  SELL = 'SELL',
 }
 
 @Table

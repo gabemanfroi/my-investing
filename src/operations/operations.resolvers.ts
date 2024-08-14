@@ -11,11 +11,13 @@ export class OperationsResolvers {
     @Args('registerOperationInput')
     registerOperationInput: RegisterOperationInput,
   ) {
-    console.log({
-      registerOperationInput: this.operationsService.registerOperation(
-        registerOperationInput,
-      ),
-    });
-    return true;
+    try {
+      const registeredOperation =
+        await this.operationsService.registerOperation(registerOperationInput);
+
+      return !!registeredOperation;
+    } catch {
+      return false;
+    }
   }
 }
