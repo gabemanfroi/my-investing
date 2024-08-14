@@ -1,6 +1,7 @@
 import { IsNumber, IsString } from 'class-validator';
 import { AssetClass } from 'src/assets/asset.entity';
 import { ListAssetsClassesResponse } from 'src/graphql';
+import { plainToInstance } from 'class-transformer';
 
 export class ReadAssetClassDto {
   @IsNumber()
@@ -10,10 +11,10 @@ export class ReadAssetClassDto {
   name: string;
 
   static fromModel(assetClass: AssetClass): ReadAssetClassDto {
-    return {
+    return plainToInstance(ReadAssetClassDto, {
       id: assetClass.id,
       name: assetClass.name,
-    };
+    });
   }
 
   static manyFromModel(classes: AssetClass[]): ReadAssetClassDto[] {

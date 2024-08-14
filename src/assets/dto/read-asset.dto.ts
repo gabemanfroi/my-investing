@@ -1,7 +1,8 @@
-import { IsDecimal, IsNumber, IsString } from 'class-validator';
+import { IsDecimal, IsInstance, IsNumber, IsString } from 'class-validator';
 import { ReadAssetClassDto } from 'src/assets/dto/read-asset-class.dto';
 import { Asset } from 'src/assets/asset.entity';
 import { ListAssetsResponse } from 'src/graphql';
+import { plainToInstance } from 'class-transformer';
 
 export class ReadPortfolioAssetDto {
   @IsNumber()
@@ -30,15 +31,15 @@ export class ReadAssetDto {
   @IsString()
   ticker: string;
 
-  @IsString()
+  @IsInstance(ReadAssetClassDto)
   class: ReadAssetClassDto;
 
   static fromModel(asset: Asset): ReadAssetDto {
-    return {
+    return plainToInstance(ReadAssetDto, {
       id: Number(asset.id),
       ticker: asset.ticker,
       class: ReadAssetClassDto.fromModel(asset.class),
-    };
+    });
   }
 
   static manyFromModel(assets: Asset[]): ReadAssetDto[] {
