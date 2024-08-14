@@ -1,16 +1,17 @@
 import { RegisterOperationInput } from 'src/graphql';
-import { Operation } from 'src/operations/operation.entity';
+import { CreateOperationDto } from 'src/operations/dto/create-operation.dto';
+import { plainToInstance } from 'class-transformer';
 
 export class OperationsMappers {
   static fromRegisterOperationInputToOperation(
     registerOperationInput: RegisterOperationInput,
-  ): Partial<Operation> {
-    const operation = new Operation();
-    operation.assetId = Number(registerOperationInput.operation.assetId);
-    operation.type = registerOperationInput.operation.type;
-    operation.price = registerOperationInput.operation.price;
-    operation.quantity = registerOperationInput.operation.quantity;
-    operation.portfolioId = Number(registerOperationInput.portfolioId);
-    return operation;
+  ): CreateOperationDto {
+    return plainToInstance(CreateOperationDto, {
+      assetId: Number(registerOperationInput.operation.assetId),
+      type: registerOperationInput.operation.type,
+      price: registerOperationInput.operation.price,
+      quantity: registerOperationInput.operation.quantity,
+      portfolioId: Number(registerOperationInput.portfolioId),
+    });
   }
 }

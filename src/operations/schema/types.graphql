@@ -6,7 +6,7 @@ enum OperationType {
 type Operation {
     asset: Asset!
     price: Float!
-    quantity: Float!
+    quantity: Int!
     createdAt: String!
     type: OperationType!
 }
@@ -14,7 +14,7 @@ type Operation {
 input OperationInput {
     assetId: ID!
     price: Float!
-    quantity: Float!
+    quantity: Int!
     type: OperationType!
 }
 

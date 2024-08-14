@@ -1,13 +1,11 @@
 import {
   BelongsTo,
-  BelongsToMany,
   Column,
   ForeignKey,
   HasMany,
   Model,
   Table,
 } from 'sequelize-typescript';
-import { Portfolio } from 'src/portfolios/portfolio.entity';
 import { Operation } from 'src/operations/operation.entity';
 import { InferAttributes, InferCreationAttributes } from 'sequelize';
 
@@ -38,6 +36,6 @@ export class Asset extends Model<
   @BelongsTo(() => AssetClass)
   class: AssetClass;
 
-  @BelongsToMany(() => Portfolio, () => Operation)
-  portfolios: Portfolio[];
+  @HasMany(() => Operation)
+  operations: Operation[];
 }

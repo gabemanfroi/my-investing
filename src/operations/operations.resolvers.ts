@@ -1,6 +1,7 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { OperationsService } from 'src/operations/operations.service';
 import { RegisterOperationInput } from 'src/graphql';
+import { OperationsMappers } from 'src/operations/operations.mappers';
 
 @Resolver('Operations')
 export class OperationsResolvers {
@@ -11,6 +12,10 @@ export class OperationsResolvers {
     @Args('registerOperationInput')
     registerOperationInput: RegisterOperationInput,
   ) {
-    return this.operationsService.registerOperation(registerOperationInput);
+    const dto = OperationsMappers.fromRegisterOperationInputToOperation(
+      registerOperationInput,
+    );
+
+    return this.operationsService.registerOperation(dto);
   }
 }

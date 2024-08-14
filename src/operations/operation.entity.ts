@@ -1,9 +1,11 @@
 import {
+  AutoIncrement,
   BelongsTo,
   Column,
   DataType,
   ForeignKey,
   Model,
+  PrimaryKey,
   Table,
 } from 'sequelize-typescript';
 import { Asset } from 'src/assets/asset.entity';
@@ -20,12 +22,17 @@ export class Operation extends Model<
   InferAttributes<Operation>,
   InferCreationAttributes<Operation>
 > {
-  @ForeignKey(() => Portfolio)
+  @PrimaryKey
+  @AutoIncrement
   @Column
+  id: number;
+
+  @ForeignKey(() => Portfolio)
+  @Column({ unique: false })
   portfolioId: number;
 
   @ForeignKey(() => Asset)
-  @Column
+  @Column({ unique: false })
   assetId: number;
 
   @Column
@@ -37,7 +44,7 @@ export class Operation extends Model<
   @BelongsTo(() => Asset)
   asset: Asset;
 
-  @Column
+  @Column({ type: DataType.FLOAT, allowNull: false })
   price: number;
 
   @Column({
