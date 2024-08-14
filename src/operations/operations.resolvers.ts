@@ -11,13 +11,6 @@ export class OperationsResolvers {
     @Args('registerOperationInput')
     registerOperationInput: RegisterOperationInput,
   ) {
-    try {
-      const registeredOperation =
-        await this.operationsService.registerOperation(registerOperationInput);
-
-      return !!registeredOperation;
-    } catch {
-      return false;
-    }
+    return this.operationsService.registerOperation(registerOperationInput);
   }
 }

@@ -1,6 +1,6 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { AssetsService } from 'src/assets/assets.service';
-import { CreateAssetInput } from 'src/graphql';
+import { CreateAssetClassInput, CreateAssetInput } from 'src/graphql';
 
 @Resolver('Assets')
 export class AssetsResolver {
@@ -13,5 +13,12 @@ export class AssetsResolver {
     console.log(this.assetsService.createAsset(createAssetInput));
 
     return true;
+  }
+
+  @Mutation('CreateAssetClass')
+  async createAssetClass(
+    @Args('createAssetClassInput') createAssetClassInput: CreateAssetClassInput,
+  ) {
+    return this.assetsService.createAssetClass(createAssetClassInput);
   }
 }

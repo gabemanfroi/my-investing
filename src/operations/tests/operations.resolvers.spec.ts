@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { OperationsResolvers } from 'src/operations/operations.resolvers';
 import { OperationsService } from 'src/operations/operations.service';
 import { OperationType, RegisterOperationInput } from 'src/graphql';
-import { OperationsResolvers } from 'src/operations/operations.resolvers';
 
 describe('OperationsResolvers', () => {
   let resolver: OperationsResolvers;
@@ -29,7 +29,7 @@ describe('OperationsResolvers', () => {
   });
 
   describe('registerOperation', () => {
-    it('should return true if operation is registered successfully', async () => {
+    it('should call OperationsService.registerOperation with correct input', async () => {
       const input: RegisterOperationInput = {
         operation: {
           assetId: '1',
@@ -40,36 +40,19 @@ describe('OperationsResolvers', () => {
         portfolioId: '1',
       };
 
-      (operationsService.registerOperation as jest.Mock).mockResolvedValue({
-        id: 1,
-      });
-
-      const result = await resolver.registerOperation(input);
-      expect(result).toBe(true);
-      expect(operationsService.registerOperation).toHaveBeenCalledWith(input);
-    });
-
-    it('should return false if operation registration fails', async () => {
-      const input: RegisterOperationInput = {
-        operation: {
-          assetId: '1',
-          price: 100,
-          quantity: 10,
-          type: OperationType.BUY,
-        },
-        portfolioId: '1',
-      };
+      const expectedResult = { id: 1, ...input.operation }; // Assuming the service returns this
 
       (operationsService.registerOperation as jest.Mock).mockResolvedValue(
-        null,
+        expectedResult,
       );
 
       const result = await resolver.registerOperation(input);
-      expect(result).toBe(false);
+
       expect(operationsService.registerOperation).toHaveBeenCalledWith(input);
+      expect(result).toEqual(expectedResult);
     });
 
-    it('should return false if an exception is thrown', async () => {
+    it('should handle errors thrown by OperationsService.registerOperation', async () => {
       const input: RegisterOperationInput = {
         operation: {
           assetId: '1',
@@ -84,8 +67,9 @@ describe('OperationsResolvers', () => {
         new Error('Test error'),
       );
 
-      const result = await resolver.registerOperation(input);
-      expect(result).toBe(false);
+      await expect(resolver.registerOperation(input)).rejects.toThrow(
+        'Test error',
+      );
     });
   });
 });

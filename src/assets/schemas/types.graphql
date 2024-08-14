@@ -13,3 +13,7 @@ input CreateAssetInput {
     ticker: String!
     assetClassId: ID!
 }
+
+input CreateAssetClassInput {
+    name: String!
+}

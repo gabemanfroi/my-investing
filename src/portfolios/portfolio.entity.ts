@@ -1,17 +1,20 @@
 import {
   BelongsTo,
-  BelongsToMany,
   Column,
   ForeignKey,
+  HasMany,
   Model,
   Table,
 } from 'sequelize-typescript';
 import { User } from 'src/users/user.entity';
-import { Asset } from 'src/assets/asset.entity';
 import { Operation } from 'src/operations/operation.entity';
+import { InferAttributes, InferCreationAttributes } from 'sequelize';
 
 @Table
-export class Portfolio extends Model {
+export class Portfolio extends Model<
+  InferAttributes<Portfolio>,
+  InferCreationAttributes<Portfolio>
+> {
   @ForeignKey(() => User)
   @Column
   userId: number;
@@ -19,6 +22,6 @@ export class Portfolio extends Model {
   @BelongsTo(() => User)
   user: User;
 
-  @BelongsToMany(() => Asset, () => Operation)
-  assets: Asset[];
+  @HasMany(() => Operation)
+  operations: Operation[];
 }

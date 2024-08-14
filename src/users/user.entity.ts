@@ -1,7 +1,11 @@
 import { Column, Model, Table } from 'sequelize-typescript';
+import { InferAttributes, InferCreationAttributes } from 'sequelize';
 
 @Table
-export class User extends Model {
+export class User extends Model<
+  InferAttributes<User>,
+  InferCreationAttributes<User>
+> {
   @Column
   firstName: string;
 

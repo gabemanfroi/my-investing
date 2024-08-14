@@ -8,6 +8,7 @@ import {
 } from 'sequelize-typescript';
 import { Asset } from 'src/assets/asset.entity';
 import { Portfolio } from 'src/portfolios/portfolio.entity';
+import { InferAttributes, InferCreationAttributes } from 'sequelize';
 
 export enum OperationType {
   BUY = 'BUY',
@@ -15,7 +16,10 @@ export enum OperationType {
 }
 
 @Table
-export class Operation extends Model {
+export class Operation extends Model<
+  InferAttributes<Operation>,
+  InferCreationAttributes<Operation>
+> {
   @ForeignKey(() => Portfolio)
   @Column
   portfolioId: number;

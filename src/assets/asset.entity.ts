@@ -9,9 +9,13 @@ import {
 } from 'sequelize-typescript';
 import { Portfolio } from 'src/portfolios/portfolio.entity';
 import { Operation } from 'src/operations/operation.entity';
+import { InferAttributes, InferCreationAttributes } from 'sequelize';
 
 @Table
-export class AssetClass extends Model {
+export class AssetClass extends Model<
+  InferAttributes<AssetClass>,
+  InferCreationAttributes<AssetClass>
+> {
   @Column
   name: string;
 

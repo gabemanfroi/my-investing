@@ -15,6 +15,7 @@ export class OperationsService {
       registerOperationInput,
     );
 
-    return this.operationsRepository.create(operation);
+    const createdOperation = this.operationsRepository.create(operation);
+    return !!createdOperation;
   }
 }

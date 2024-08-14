@@ -18,6 +18,10 @@ export interface CreateAssetInput {
     assetClassId: string;
 }
 
+export interface CreateAssetClassInput {
+    name: string;
+}
+
 export interface OperationInput {
     assetId: string;
     price: number;
@@ -31,6 +35,7 @@ export interface RegisterOperationInput {
 }
 
 export interface IMutation {
+    CreateAssetClass(createAssetClassInput?: Nullable<CreateAssetClassInput>): boolean | Promise<boolean>;
     CreateAsset(createAssetInput?: Nullable<CreateAssetInput>): boolean | Promise<boolean>;
     RegisterOperation(registerOperationInput?: Nullable<RegisterOperationInput>): boolean | Promise<boolean>;
     CreatePortfolio(userId: number): Portfolio | Promise<Portfolio>;
