@@ -25,7 +25,7 @@ export class ReadPortfolioDto {
       };
     } = {};
 
-    portfolio.operations.forEach((operation) => {
+    (portfolio.operations ?? []).forEach((operation) => {
       const assetKey = `${operation.asset.id}`; // Assuming asset ID uniquely identifies an asset
 
       if (!assetMap[assetKey]) {

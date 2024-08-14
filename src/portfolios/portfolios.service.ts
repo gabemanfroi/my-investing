@@ -32,24 +32,27 @@ export class PortfoliosService {
     return this.sequelize.transaction(async (transaction) => {
       const existingPortfolio = await this.portfoliosRepository.findOne({
         where: { userId },
-        include: [Asset],
         transaction,
       });
 
       if (existingPortfolio) {
-        return existingPortfolio;
+        throw new Error('user already has a portfolio');
       }
 
       const createdPortfolio = await this.portfoliosRepository.create(
         { userId },
-        { transaction },
+        {
+          transaction,
+          include: [
+            {
+              model: Operation,
+              include: [{ model: Asset, include: [AssetClass] }],
+            },
+          ],
+        },
       );
 
-      return this.portfoliosRepository.findOne({
-        where: { id: createdPortfolio.id },
-        include: [Asset],
-        transaction,
-      });
+      return ReadPortfolioDto.fromModel(createdPortfolio);
     });
   }
 }
