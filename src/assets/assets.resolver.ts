@@ -1,6 +1,7 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { AssetsService } from 'src/assets/assets.service';
 import { CreateAssetClassInput, CreateAssetInput } from 'src/graphql';
+import { AssetsClassMapper, AssetsMappers } from 'src/assets/assets.mappers';
 
 @Resolver('Assets')
 export class AssetsResolver {
@@ -10,15 +11,18 @@ export class AssetsResolver {
   async createAsset(
     @Args('createAssetInput') createAssetInput: CreateAssetInput,
   ) {
-    console.log(this.assetsService.createAsset(createAssetInput));
-
-    return true;
+    const dto = AssetsMappers.fromCreateAssetInput(createAssetInput);
+    return this.assetsService.createAsset(dto);
   }
 
   @Mutation('CreateAssetClass')
   async createAssetClass(
     @Args('createAssetClassInput') createAssetClassInput: CreateAssetClassInput,
   ) {
-    return this.assetsService.createAssetClass(createAssetClassInput);
+    const dto = AssetsClassMapper.fromCreateAssetClassInputToDto(
+      createAssetClassInput,
+    );
+
+    return this.assetsService.createAssetClass(dto);
   }
 }

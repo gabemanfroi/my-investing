@@ -1,25 +1,25 @@
 import { CreateAssetClassInput, CreateAssetInput } from 'src/graphql';
-import { Asset, AssetClass } from 'src/assets/asset.entity';
+import { CreateAssetClassDto } from 'src/assets/dto/create-asset-class.dto';
+import { plainToClass, plainToInstance } from 'class-transformer';
+import { CreateAssetDto } from 'src/assets/dto/create-asset.dto';
 
 export class AssetsMappers {
   static fromCreateAssetInput(
     createAssetInput: CreateAssetInput,
-  ): Partial<Asset> {
-    const asset = new Asset();
-    asset.ticker = createAssetInput.ticker;
-    asset.assetClassId = Number(createAssetInput.assetClassId);
-
-    return asset;
+  ): CreateAssetDto {
+    return plainToInstance(CreateAssetDto, {
+      ticker: createAssetInput.ticker,
+      assetClassId: Number(createAssetInput.assetClassId),
+    });
   }
 }
 
 export class AssetsClassMapper {
-  static fromCreateAssetClassInput(
+  static fromCreateAssetClassInputToDto(
     createAssetClassInput: CreateAssetClassInput,
-  ): Partial<AssetClass> {
-    const assetClass = new AssetClass();
-    assetClass.name = createAssetClassInput.name;
-    console.log({ assetClass });
-    return assetClass;
+  ): CreateAssetClassDto {
+    return plainToClass(CreateAssetClassDto, {
+      name: createAssetClassInput.name.toUpperCase(),
+    });
   }
 }

@@ -24,7 +24,10 @@ export class AssetClass extends Model<
 }
 
 @Table
-export class Asset extends Model {
+export class Asset extends Model<
+  InferAttributes<Asset>,
+  InferCreationAttributes<Asset>
+> {
   @Column
   ticker: string;
 
