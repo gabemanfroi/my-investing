@@ -7,7 +7,7 @@ import { ReadPortfolioDto } from 'src/portfolios/dto/read-portfolio.dto';
 export class PortfoliosResolver {
   constructor(private readonly portfolioService: PortfoliosService) {}
 
-  @Query('GetUserPortfolio')
+  @Query('getUserPortfolio')
   async getUserPortfolio(
     @Args('getUserPortfolioRequest')
     getUserPortfolioRequest: GetUserPortfolioRequest,
@@ -19,7 +19,7 @@ export class PortfoliosResolver {
     return ReadPortfolioDto.toGetUserPortfolioResponse(response);
   }
 
-  @Mutation('CreatePortfolio')
+  @Mutation('createPortfolio')
   async createPortfolio(@Args('userId') userId: number) {
     return this.portfolioService.createPortfolio(userId);
   }

@@ -4,10 +4,10 @@ import { CreateAssetClassInput, CreateAssetInput } from 'src/graphql';
 import { AssetsClassMapper, AssetsMappers } from 'src/assets/assets.mappers';
 
 @Resolver('Assets')
-export class AssetsResolver {
+export class AssetsResolvers {
   constructor(private readonly assetsService: AssetsService) {}
 
-  @Mutation('CreateAsset')
+  @Mutation('createAsset')
   async createAsset(
     @Args('createAssetInput') createAssetInput: CreateAssetInput,
   ) {
@@ -15,7 +15,7 @@ export class AssetsResolver {
     return this.assetsService.createAsset(dto);
   }
 
-  @Mutation('CreateAssetClass')
+  @Mutation('createAssetClass')
   async createAssetClass(
     @Args('createAssetClassInput') createAssetClassInput: CreateAssetClassInput,
   ) {

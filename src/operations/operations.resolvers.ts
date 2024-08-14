@@ -9,7 +9,7 @@ import { GqlAuthGuard } from 'src/infra/guards/gql.auth.guard';
 export class OperationsResolvers {
   constructor(private readonly operationsService: OperationsService) {}
 
-  @Mutation('RegisterOperation')
+  @Mutation('registerOperation')
   @UseGuards(GqlAuthGuard)
   async registerOperation(
     @Args('registerOperationInput')
