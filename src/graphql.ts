@@ -13,72 +13,77 @@ export enum OperationType {
     SELL = "SELL"
 }
 
-export interface CreateAssetInput {
+export class CreateAssetInput {
     ticker: string;
     assetClassId: string;
 }
 
-export interface CreateAssetClassInput {
+export class CreateAssetClassInput {
     name: string;
 }
 
-export interface LoginRequest {
+export class LoginRequest {
     email: string;
     password: string;
 }
 
-export interface RegisterRequest {
+export class RegisterRequest {
     email: string;
     password: string;
     firstName: string;
     lastName: string;
 }
 
-export interface OperationInput {
+export class OperationInput {
     assetId: string;
     price: number;
     quantity: number;
     type: OperationType;
 }
 
-export interface RegisterOperationInput {
+export class RegisterOperationInput {
     operation: OperationInput;
     portfolioId: string;
 }
 
-export interface GetUserPortfolioRequest {
+export class GetUserPortfolioRequest {
     userId: number;
 }
 
-export interface IMutation {
-    CreateAssetClass(createAssetClassInput?: Nullable<CreateAssetClassInput>): boolean | Promise<boolean>;
-    CreateAsset(createAssetInput?: Nullable<CreateAssetInput>): boolean | Promise<boolean>;
-    Login(loginRequest: LoginRequest): LoginResponse | Promise<LoginResponse>;
-    Register(registerRequest: RegisterRequest): RegisterResponse | Promise<RegisterResponse>;
-    RegisterOperation(registerOperationInput?: Nullable<RegisterOperationInput>): boolean | Promise<boolean>;
-    CreatePortfolio(userId: number): Portfolio | Promise<Portfolio>;
+export abstract class IMutation {
+    abstract createAssetClass(createAssetClassInput?: Nullable<CreateAssetClassInput>): boolean | Promise<boolean>;
+
+    abstract createAsset(createAssetInput?: Nullable<CreateAssetInput>): boolean | Promise<boolean>;
+
+    abstract login(loginRequest: LoginRequest): LoginResponse | Promise<LoginResponse>;
+
+    abstract register(registerRequest: RegisterRequest): RegisterResponse | Promise<RegisterResponse>;
+
+    abstract registerOperation(registerOperationInput?: Nullable<RegisterOperationInput>): boolean | Promise<boolean>;
+
+    abstract createPortfolio(userId: number): Portfolio | Promise<Portfolio>;
 }
 
-export interface AssetClass {
+export class AssetClass {
     id: string;
     name: string;
 }
 
-export interface Asset {
+export class Asset {
     id: string;
     ticker: string;
     class: AssetClass;
 }
 
-export interface LoginResponse {
+export class LoginResponse {
     token: string;
 }
 
-export interface RegisterResponse {
+export class RegisterResponse {
     token: string;
 }
 
-export interface Operation {
+export class Operation {
     asset: Asset;
     price: number;
     quantity: number;
@@ -86,11 +91,11 @@ export interface Operation {
     type: OperationType;
 }
 
-export interface IQuery {
-    GetUserPortfolio(getUserPortfolioRequest?: Nullable<GetUserPortfolioRequest>): GetUserPortfolioResponse | Promise<GetUserPortfolioResponse>;
+export abstract class IQuery {
+    abstract getUserPortfolio(getUserPortfolioRequest?: Nullable<GetUserPortfolioRequest>): GetUserPortfolioResponse | Promise<GetUserPortfolioResponse>;
 }
 
-export interface PortfolioAsset {
+export class PortfolioAsset {
     id: string;
     ticker: string;
     className: string;
@@ -99,11 +104,11 @@ export interface PortfolioAsset {
     cumulativeTotal: number;
 }
 
-export interface Portfolio {
+export class Portfolio {
     assets: PortfolioAsset[];
 }
 
-export interface GetUserPortfolioResponse {
+export class GetUserPortfolioResponse {
     portfolio: Portfolio;
 }
 
