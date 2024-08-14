@@ -14,7 +14,9 @@ export class AssetClass extends Model<
   InferAttributes<AssetClass>,
   InferCreationAttributes<AssetClass>
 > {
-  @Column
+  @Column({
+    unique: true,
+  })
   name: string;
 
   @HasMany(() => Asset)
@@ -26,7 +28,9 @@ export class Asset extends Model<
   InferAttributes<Asset>,
   InferCreationAttributes<Asset>
 > {
-  @Column
+  @Column({
+    unique: true,
+  })
   ticker: string;
 
   @ForeignKey(() => AssetClass)
