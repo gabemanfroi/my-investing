@@ -34,6 +34,10 @@ export interface RegisterOperationInput {
     portfolioId: string;
 }
 
+export interface GetUserPortfolioRequest {
+    userId: number;
+}
+
 export interface IMutation {
     CreateAssetClass(createAssetClassInput?: Nullable<CreateAssetClassInput>): boolean | Promise<boolean>;
     CreateAsset(createAssetInput?: Nullable<CreateAssetInput>): boolean | Promise<boolean>;
@@ -61,11 +65,24 @@ export interface Operation {
 }
 
 export interface IQuery {
-    GetUserPortfolio(userId: number): Portfolio | Promise<Portfolio>;
+    GetUserPortfolio(getUserPortfolioRequest?: Nullable<GetUserPortfolioRequest>): GetUserPortfolioResponse | Promise<GetUserPortfolioResponse>;
+}
+
+export interface PortfolioAsset {
+    id: string;
+    ticker: string;
+    className: string;
+    totalAmount: number;
+    averagePrice: number;
+    cumulativeTotal: number;
 }
 
 export interface Portfolio {
-    assets: Asset[];
+    assets: PortfolioAsset[];
+}
+
+export interface GetUserPortfolioResponse {
+    portfolio: Portfolio;
 }
 
 type Nullable<T> = T | null;
