@@ -11,7 +11,8 @@ export class AuthService {
     @Inject('USER_REPOSITORY')
     private readonly userRepository: typeof User,
     private readonly jwtService: JwtService,
-  ) {}
+  ) {
+  }
 
   async register(registerDto: RegisterDto): Promise<{ accessToken: string }> {
     const userExists = await this.userRepository.findOne({
@@ -35,6 +36,7 @@ export class AuthService {
 
   async login(loginDto: LoginDto): Promise<{ accessToken: string }> {
     const user = await this.validateUser(loginDto.email, loginDto.password);
+    console.log({ user });
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
     }

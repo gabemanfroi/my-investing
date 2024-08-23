@@ -2,10 +2,12 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { AuthService } from 'src/auth/auth.service';
 import { LoginRequest, RegisterRequest } from 'src/graphql';
 import { RegisterDto } from 'src/auth/dto/register.dto';
+import { LoginDto } from 'src/auth/dto/login.dto';
 
 @Resolver('Auth')
 export class AuthResolvers {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private readonly authService: AuthService) {
+  }
 
   @Mutation('register')
   async register(@Args('registerRequest') registerRequest: RegisterRequest) {
@@ -15,6 +17,6 @@ export class AuthResolvers {
 
   @Mutation('login')
   async login(@Args('loginRequest') loginRequest: LoginRequest) {
-    return this.authService.login(loginRequest);
+    return LoginDto.toLoginResponse(await this.authService.login(loginRequest));
   }
 }
