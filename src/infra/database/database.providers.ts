@@ -1,20 +1,21 @@
 import { Sequelize } from 'sequelize-typescript';
-import { Asset, AssetClass } from 'src/assets/asset.entity';
-import { User } from 'src/users/user.entity';
-import { Portfolio } from 'src/portfolios/portfolio.entity';
-import { Operation } from 'src/operations/operation.entity';
+import { Asset, AssetClass } from 'src/modules/assets/asset.entity';
+import { User } from 'src/modules/users/user.entity';
+import { Portfolio } from 'src/modules/portfolios/portfolio.entity';
+import { Operation } from 'src/modules/operations/operation.entity';
+import { AppConfigService } from 'src/infra/config/app-config.service';
 
 export const databaseProviders = [
   {
     provide: 'SEQUELIZE',
-    useFactory: async () => {
+    useFactory: async (appConfigService: AppConfigService) => {
       const sequelize = new Sequelize({
-        dialect: 'postgres',
-        host: 'timescaledb',
-        port: 5432,
-        username: 'postgres',
-        password: 'postgres',
-        database: 'nest_db',
+        dialect: appConfigService.databaseDialect as unknown as any,
+        host: appConfigService.databaseHost,
+        port: appConfigService.databasePort,
+        username: appConfigService.databaseUser,
+        password: appConfigService.databasePassword,
+        database: appConfigService.databaseName,
         define: {
           underscored: true,
         },
@@ -23,5 +24,6 @@ export const databaseProviders = [
       await sequelize.sync();
       return sequelize;
     },
+    inject: [AppConfigService],
   },
 ];

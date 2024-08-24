@@ -1,18 +1,21 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AssetsModule } from './assets/assets.module';
 import { DatabaseModule } from 'src/infra/database/database.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { UsersModule } from './users/users.module';
-import { PortfoliosModule } from 'src/portfolios/portfolios.module';
-import { OperationsModule } from './operations/operations.module';
-import { AuthModule } from './auth/auth.module';
 import * as path from 'node:path';
+import { AssetsModule } from 'src/modules/assets/assets.module';
+import { UsersModule } from 'src/modules/users/users.module';
+import { PortfoliosModule } from 'src/modules/portfolios/portfolios.module';
+import { OperationsModule } from 'src/modules/operations/operations.module';
+import { AuthModule } from 'src/modules/auth/auth.module';
+import { StockMarketModule } from './modules/stock-market/stock-market.module';
+import { AppConfigModule } from 'src/infra/config/app-config.module';
 
 @Module({
   imports: [
+    AppConfigModule,
     AssetsModule,
     DatabaseModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
@@ -28,6 +31,7 @@ import * as path from 'node:path';
     PortfoliosModule,
     OperationsModule,
     AuthModule,
+    StockMarketModule,
   ],
   controllers: [AppController],
   providers: [AppService],

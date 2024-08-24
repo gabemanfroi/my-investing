@@ -1,0 +1,21 @@
+type PortfolioAsset {
+    id: ID!
+    ticker: String!
+    className: String!
+    totalAmount: Int!
+    averagePrice: Float!
+    cumulativeTotal: Float!
+    currentPrice: Float
+}
+
+type Portfolio {
+    assets: [PortfolioAsset!]!
+}
+
+type GetUserPortfolioResponse {
+    portfolio: Portfolio!
+}
+
+input GetUserPortfolioRequest {
+    userId: Int!
+}

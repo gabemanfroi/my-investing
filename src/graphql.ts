@@ -115,6 +115,7 @@ export interface PortfolioAsset {
     totalAmount: number;
     averagePrice: number;
     cumulativeTotal: number;
+    currentPrice?: Nullable<number>;
 }
 
 export interface Portfolio {
