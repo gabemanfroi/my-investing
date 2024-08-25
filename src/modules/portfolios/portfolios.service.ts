@@ -5,6 +5,8 @@ import { ReadPortfolioDto } from 'src/modules/portfolios/dto/read-portfolio.dto'
 import { Portfolio } from 'src/modules/portfolios/portfolio.entity';
 import { Asset, AssetClass } from 'src/modules/assets/asset.entity';
 import { StockMarketService } from 'src/modules/stock-market/interfaces/stock-market.service';
+import { OnEvent } from '@nestjs/event-emitter';
+import { User } from 'src/modules/users/user.entity';
 
 @Injectable()
 export class PortfoliosService {
@@ -16,6 +18,12 @@ export class PortfoliosService {
     @Inject('StockMarketService')
     private readonly stockMarketService: StockMarketService,
   ) {}
+
+  @OnEvent('user.created')
+  async handleUserCreatedEvent(user: User) {
+    console.log('got here');
+    return this.createPortfolio(user.id);
+  }
 
   async getUserPortfolio(userId: number): Promise<ReadPortfolioDto> {
     const portfolio = await this.portfoliosRepository.findOne({

@@ -60,6 +60,7 @@ export class PortfoliosResolver {
   @Mutation(MUTATIONS.CREATE_PORTFOLIO)
   @UseGuards(GqlAuthGuard)
   async createPortfolio(@CurrentUser() user: User) {
+    return null;
     return this.portfolioService.createPortfolio(user.id);
   }
 }

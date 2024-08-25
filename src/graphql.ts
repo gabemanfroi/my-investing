@@ -35,13 +35,6 @@ export interface LoginRequest {
     password: string;
 }
 
-export interface SignUpRequest {
-    email: string;
-    password: string;
-    firstName: string;
-    lastName: string;
-}
-
 export interface OperationInput {
     assetId: string;
     price: number;
@@ -66,13 +59,20 @@ export interface GetPortfolioVariationRequest {
     portfolioId: string;
 }
 
+export interface SignUpRequest {
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+}
+
 export interface IMutation {
     createAssetClass(createAssetClassInput?: Nullable<CreateAssetClassInput>): boolean | Promise<boolean>;
     createAsset(createAssetInput?: Nullable<CreateAssetInput>): boolean | Promise<boolean>;
     login(loginRequest: LoginRequest): LoginResponse | Promise<LoginResponse>;
-    signUp(signUpRequest: SignUpRequest): SignUpResponse | Promise<SignUpResponse>;
     registerOperation(registerOperationInput?: Nullable<RegisterOperationInput>): boolean | Promise<boolean>;
-    createPortfolio(): Portfolio | Promise<Portfolio>;
+    createPortfolio(): boolean | Promise<boolean>;
+    signUp(signUpRequest: SignUpRequest): SignUpResponse | Promise<SignUpResponse>;
 }
 
 export interface IQuery {
@@ -103,10 +103,6 @@ export interface ListAssetsClassesResponse {
 }
 
 export interface LoginResponse {
-    token: string;
-}
-
-export interface SignUpResponse {
     token: string;
 }
 
@@ -143,6 +139,10 @@ export interface GetPortfolioInvestedAmountResponse {
 export interface GetPortfolioVariationResponse {
     valueVariation: number;
     percentageVariation: number;
+}
+
+export interface SignUpResponse {
+    token: string;
 }
 
 type Nullable<T> = T | null;

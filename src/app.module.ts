@@ -9,9 +9,10 @@ import { AssetsModule } from 'src/modules/assets/assets.module';
 import { UsersModule } from 'src/modules/users/users.module';
 import { PortfoliosModule } from 'src/modules/portfolios/portfolios.module';
 import { OperationsModule } from 'src/modules/operations/operations.module';
-import { AuthModule } from 'src/modules/auth/auth.module';
 import { StockMarketModule } from './modules/stock-market/stock-market.module';
 import { AppConfigModule } from 'src/infra/config/app-config.module';
+import { AuthModule } from 'src/modules/auth/auth.module';
+import { CommonAuthModule } from 'src/infra/core/common-auth/common-auth.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { AppConfigModule } from 'src/infra/config/app-config.module';
     UsersModule,
     PortfoliosModule,
     OperationsModule,
+    CommonAuthModule,
     AuthModule,
     StockMarketModule,
   ],
