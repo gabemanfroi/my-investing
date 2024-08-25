@@ -98,7 +98,6 @@ export class PortfoliosService {
     valueVariation: number;
     percentageVariation: number;
   }> {
-    console.log('got here');
     const portfolio = await this.portfoliosRepository.findOne({
       where: { id: portfolioId },
       include: [

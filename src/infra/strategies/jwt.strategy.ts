@@ -4,14 +4,18 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 
 import { User } from 'src/modules/users/user.entity';
 import { AuthService } from 'src/modules/auth/auth.service';
+import { AppConfigService } from 'src/infra/config/app-config.service';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(private readonly authService: AuthService) {
+  constructor(
+    private readonly authService: AuthService,
+    private readonly appConfigService: AppConfigService,
+  ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      secretOrKey: 'blablabla',
+      secretOrKey: appConfigService.jwtSecret,
     });
   }
 

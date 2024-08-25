@@ -27,7 +27,13 @@ export class AuthService {
       ...registerDto,
       password: hashedPassword,
     });
-    const payload = { email: user.email, sub: user.id };
+    const payload = {
+      email: user.email,
+      sub: user.id,
+      userId: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+    };
     return {
       accessToken: this.jwtService.sign(payload),
     };
@@ -38,7 +44,13 @@ export class AuthService {
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
     }
-    const payload = { email: user.email, sub: user.id };
+    const payload = {
+      email: user.email,
+      sub: user.id,
+      userId: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+    };
     return {
       accessToken: this.jwtService.sign(payload),
     };

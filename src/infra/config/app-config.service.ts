@@ -36,4 +36,8 @@ export class AppConfigService {
   get brapiApiHost(): string {
     return this.configService.get<string>('BRAPI_API_HOST');
   }
+
+  get jwtSecret(): string {
+    return this.configService.get<string>('JWT_SECRET');
+  }
 }
