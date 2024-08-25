@@ -10,10 +10,10 @@ export class AuthResolvers {
   constructor(private readonly authService: AuthService) {}
 
   @Mutation(MUTATIONS.SIGN_UP)
-  async register(
-    @Args('registerRequest') registerRequest: SignUpRequest,
+  async signUp(
+    @Args('signUpRequest') signUpRequest: SignUpRequest,
   ): Promise<SignUpResponse> {
-    const dto = SignUpDto.fromRegisterRequest(registerRequest);
+    const dto = SignUpDto.fromSignUpRequest(signUpRequest);
     return SignUpDto.toSignUpResponse(await this.authService.register(dto));
   }
 

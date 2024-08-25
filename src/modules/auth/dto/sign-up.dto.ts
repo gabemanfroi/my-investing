@@ -6,7 +6,7 @@ export class SignUpDto {
   firstName: string;
   lastName: string;
 
-  static fromRegisterRequest(registerInput: SignUpRequest): SignUpDto {
+  static fromSignUpRequest(registerInput: SignUpRequest): SignUpDto {
     return {
       email: registerInput.email,
       password: registerInput.password,
