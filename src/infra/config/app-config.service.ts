@@ -32,4 +32,8 @@ export class AppConfigService {
   get brapiApiKey(): string {
     return this.configService.get<string>('BRAPI_API_KEY');
   }
+
+  get brapiApiHost(): string {
+    return this.configService.get<string>('BRAPI_API_HOST');
+  }
 }

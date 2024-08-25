@@ -93,4 +93,48 @@ export class PortfoliosService {
       0,
     );
   }
+
+  async getPortfolioVariation(portfolioId: string): Promise<{
+    valueVariation: number;
+    percentageVariation: number;
+  }> {
+    console.log('got here');
+    const portfolio = await this.portfoliosRepository.findOne({
+      where: { id: portfolioId },
+      include: [
+        {
+          model: Operation,
+          include: [{ model: Asset, include: [AssetClass] }],
+        },
+      ],
+    });
+
+    const mappedPortfolio = ReadPortfolioDto.fromModel(portfolio);
+
+    const totalInvestedAmount = mappedPortfolio.assets.reduce(
+      (acc, asset) => acc + asset.numberOfShares * asset.averagePrice,
+      0,
+    );
+
+    const currentPortfolioValue = await Promise.all(
+      mappedPortfolio.assets.map(async (asset) => {
+        const currentPrice = await this.stockMarketService.getStockPrice(
+          asset.ticker,
+        );
+        return currentPrice * asset.numberOfShares;
+      }),
+    );
+
+    const totalPortfolioValue = currentPortfolioValue.reduce(
+      (acc, value) => acc + value,
+      0,
+    );
+
+    return {
+      valueVariation: totalPortfolioValue - totalInvestedAmount,
+      percentageVariation:
+        ((totalPortfolioValue - totalInvestedAmount) / totalInvestedAmount) *
+        100,
+    };
+  }
 }

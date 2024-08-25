@@ -3,6 +3,8 @@ import { PortfoliosService } from 'src/modules/portfolios/portfolios.service';
 import {
   GetPortfolioInvestedAmountRequest,
   GetPortfolioInvestedAmountResponse,
+  GetPortfolioVariationRequest,
+  GetPortfolioVariationResponse,
   GetUserPortfolioRequest,
   GetUserPortfolioResponse,
 } from 'src/graphql';
@@ -45,6 +47,14 @@ export class PortfoliosResolver {
   }
 
   @Query('getPortfolioVariation')
+  @UseGuards(GqlAuthGuard)
+  async getPortfolioVariation(
+    @Args('getPortfolioVariationRequest')
+    request: GetPortfolioVariationRequest,
+  ): Promise<GetPortfolioVariationResponse> {
+    return this.portfolioService.getPortfolioVariation(request.portfolioId);
+  }
+
   @Mutation('createPortfolio')
   @UseGuards(GqlAuthGuard)
   async createPortfolio(@CurrentUser() user: User) {

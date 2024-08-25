@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { StockMarketService } from 'src/modules/stock-market/interfaces/stock-market.service';
 import { HttpService } from '@nestjs/axios';
 import { map } from 'rxjs';
+import { AppConfigService } from 'src/infra/config/app-config.service';
 
 interface BrapiQuoteResponse {
   results: {
@@ -28,19 +29,23 @@ interface BrapiQuoteResponse {
   };
 }
 
-const getTickerUrl = (ticker) =>
-  `https://brapi.dev/api/quote/${ticker}?token=7LhZQt6cA9FgqgE8Tr2GDb`;
-
 @Injectable()
 export class StockMarketBrapiService implements StockMarketService {
-  constructor(private readonly httpService: HttpService) {}
+  constructor(
+    private readonly httpService: HttpService,
+    private readonly appConfigService: AppConfigService,
+  ) {}
 
   async getStockPrice(ticker: string): Promise<number> {
     const { results } = await this.httpService
-      .get<BrapiQuoteResponse>(getTickerUrl(ticker))
+      .get<BrapiQuoteResponse>(this.getTickerUrl(ticker))
       .pipe(map((response) => response.data as BrapiQuoteResponse))
       .toPromise();
 
     return results[0].regularMarketPrice;
+  }
+
+  private getTickerUrl(ticker: string): string {
+    return `${this.appConfigService.brapiApiHost}/quote/${ticker}?token=${this.appConfigService.brapiApiKey}`;
   }
 }
