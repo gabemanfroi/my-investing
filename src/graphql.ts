@@ -35,7 +35,7 @@ export interface LoginRequest {
     password: string;
 }
 
-export interface RegisterRequest {
+export interface SignUpRequest {
     email: string;
     password: string;
     firstName: string;
@@ -70,7 +70,7 @@ export interface IMutation {
     createAssetClass(createAssetClassInput?: Nullable<CreateAssetClassInput>): boolean | Promise<boolean>;
     createAsset(createAssetInput?: Nullable<CreateAssetInput>): boolean | Promise<boolean>;
     login(loginRequest: LoginRequest): LoginResponse | Promise<LoginResponse>;
-    register(registerRequest: RegisterRequest): RegisterResponse | Promise<RegisterResponse>;
+    signUp(signUpRequest: SignUpRequest): SignUpResponse | Promise<SignUpResponse>;
     registerOperation(registerOperationInput?: Nullable<RegisterOperationInput>): boolean | Promise<boolean>;
     createPortfolio(): Portfolio | Promise<Portfolio>;
 }
@@ -106,7 +106,7 @@ export interface LoginResponse {
     token: string;
 }
 
-export interface RegisterResponse {
+export interface SignUpResponse {
     token: string;
 }
 

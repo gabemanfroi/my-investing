@@ -13,12 +13,14 @@ import { CurrentUser } from 'src/infra/decorators/current-user.decorator';
 import { User } from 'src/modules/users/user.entity';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from 'src/infra/guards/gql.auth.guard';
+import { QUERIES } from 'src/infra/core/constants/queries';
+import { MUTATIONS } from 'src/infra/core/constants/mutations';
 
 @Resolver('Portfolios')
 export class PortfoliosResolver {
   constructor(private readonly portfolioService: PortfoliosService) {}
 
-  @Query('getUserPortfolio')
+  @Query(QUERIES.GET_USER_PORTFOLIO)
   @UseGuards(GqlAuthGuard)
   async getUserPortfolio(
     @Args('getUserPortfolioRequest')
@@ -31,7 +33,7 @@ export class PortfoliosResolver {
     return ReadPortfolioDto.toGetUserPortfolioResponse(response);
   }
 
-  @Query('getPortfolioInvestedAmount')
+  @Query(QUERIES.GET_PORTFOLIO_INVESTED_AMOUNT)
   @UseGuards(GqlAuthGuard)
   async getPortfolioInvestedAmount(
     @Args('getPortfolioInvestedAmountRequest')
@@ -46,7 +48,7 @@ export class PortfoliosResolver {
     return { totalInvestedAmount };
   }
 
-  @Query('getPortfolioVariation')
+  @Query(QUERIES.GET_PORTFOLIO_VARIATION)
   @UseGuards(GqlAuthGuard)
   async getPortfolioVariation(
     @Args('getPortfolioVariationRequest')
@@ -55,7 +57,7 @@ export class PortfoliosResolver {
     return this.portfolioService.getPortfolioVariation(request.portfolioId);
   }
 
-  @Mutation('createPortfolio')
+  @Mutation(MUTATIONS.CREATE_PORTFOLIO)
   @UseGuards(GqlAuthGuard)
   async createPortfolio(@CurrentUser() user: User) {
     return this.portfolioService.createPortfolio(user.id);

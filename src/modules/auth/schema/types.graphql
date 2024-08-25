@@ -7,13 +7,13 @@ type LoginResponse {
     token: String!
 }
 
-input RegisterRequest {
+input SignUpRequest {
     email: String!
     password: String!
     firstName: String!
     lastName: String!
 }
 
-type RegisterResponse {
+type SignUpResponse {
     token: String!
 }

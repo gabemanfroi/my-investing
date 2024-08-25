@@ -2,7 +2,7 @@ import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { User } from 'src/modules/users/user.entity';
 import { JwtService } from '@nestjs/jwt';
 import { LoginDto } from 'src/modules/auth/dto/login.dto';
-import { RegisterDto } from 'src/modules/auth/dto/register.dto';
+import { SignUpDto } from 'src/modules/auth/dto/sign-up.dto';
 import { compare, hash } from 'bcrypt';
 
 @Injectable()
@@ -13,7 +13,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async register(registerDto: RegisterDto): Promise<{ accessToken: string }> {
+  async register(registerDto: SignUpDto): Promise<{ accessToken: string }> {
     const userExists = await this.userRepository.findOne({
       where: { email: registerDto.email },
     });

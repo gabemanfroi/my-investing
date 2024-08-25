@@ -1,12 +1,12 @@
-import { RegisterRequest, RegisterResponse } from 'src/graphql';
+import { SignUpRequest, SignUpResponse } from 'src/graphql';
 
-export class RegisterDto {
+export class SignUpDto {
   email: string;
   password: string;
   firstName: string;
   lastName: string;
 
-  static fromRegisterRequest(registerInput: RegisterRequest): RegisterDto {
+  static fromRegisterRequest(registerInput: SignUpRequest): SignUpDto {
     return {
       email: registerInput.email,
       password: registerInput.password,
@@ -15,9 +15,9 @@ export class RegisterDto {
     };
   }
 
-  static toRegisterResponse(registerResponse: {
+  static toSignUpResponse(registerResponse: {
     accessToken: string;
-  }): RegisterResponse {
+  }): SignUpResponse {
     return {
       token: registerResponse.accessToken,
     };
