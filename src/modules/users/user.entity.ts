@@ -1,5 +1,6 @@
-import { Column, Model, Table } from 'sequelize-typescript';
+import { Column, HasOne, Model, Table } from 'sequelize-typescript';
 import { InferAttributes, InferCreationAttributes } from 'sequelize';
+import { Portfolio } from 'src/modules/portfolios/portfolio.entity';
 
 @Table
 export class User extends Model<
@@ -17,4 +18,7 @@ export class User extends Model<
 
   @Column
   password: string;
+
+  @HasOne(() => Portfolio)
+  portfolio: Portfolio;
 }

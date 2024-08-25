@@ -77,6 +77,7 @@ export class ReadPortfolioDto {
           ...asset,
           id: `${asset.id}`,
         })),
+        portfolioId: `${dto.id}`,
       },
     };
   }

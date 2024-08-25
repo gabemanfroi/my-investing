@@ -126,6 +126,7 @@ export interface PortfolioAsset {
 
 export interface Portfolio {
     assets: PortfolioAsset[];
+    portfolioId: string;
 }
 
 export interface GetUserPortfolioResponse {

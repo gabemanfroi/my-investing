@@ -39,7 +39,6 @@ export class PortfoliosResolver {
     @Args('getPortfolioInvestedAmountRequest')
     request: GetPortfolioInvestedAmountRequest,
   ): Promise<GetPortfolioInvestedAmountResponse> {
-    console.log({ request });
     const totalInvestedAmount =
       await this.portfolioService.getPortfolioInvestedAmount(
         Number(request.portfolioId),

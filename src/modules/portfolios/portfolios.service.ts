@@ -21,7 +21,6 @@ export class PortfoliosService {
 
   @OnEvent('user.created')
   async handleUserCreatedEvent(user: User) {
-    console.log('got here');
     return this.createPortfolio(user.id);
   }
 

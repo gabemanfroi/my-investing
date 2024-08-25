@@ -10,6 +10,7 @@ type PortfolioAsset {
 
 type Portfolio {
     assets: [PortfolioAsset!]!
+    portfolioId: ID!
 }
 
 type GetUserPortfolioResponse {

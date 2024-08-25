@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { User } from 'src/modules/users/user.entity';
 import { compare } from 'bcrypt';
+import { Portfolio } from 'src/modules/portfolios/portfolio.entity';
 
 @Injectable()
 export class CommonAuthService {
@@ -14,7 +15,10 @@ export class CommonAuthService {
   }
 
   async validateUser(email: string, password: string): Promise<User | null> {
-    const user = await this.userRepository.findOne({ where: { email } });
+    const user = await this.userRepository.findOne({
+      where: { email },
+      include: [Portfolio],
+    });
     if (user && (await compare(password, user.password))) {
       return user;
     }
