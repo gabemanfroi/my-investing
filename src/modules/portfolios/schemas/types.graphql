@@ -2,7 +2,7 @@ type PortfolioAsset {
     id: ID!
     ticker: String!
     className: String!
-    totalAmount: Int!
+    numberOfShares: Int!
     averagePrice: Float!
     cumulativeTotal: Float!
     currentPrice: Float
@@ -17,5 +17,22 @@ type GetUserPortfolioResponse {
 }
 
 input GetUserPortfolioRequest {
-    userId: Int!
+    userId: ID!
+}
+
+input GetPortfolioInvestedAmountRequest {
+    portfolioId: ID!
+}
+
+type GetPortfolioInvestedAmountResponse {
+    totalInvestedAmount: Float!
+}
+
+input GetPortfolioVariationRequest {
+    portfolioId: ID!
+}
+
+type GetPortfolioVariationResponse {
+    valueVariation: Float!
+    percentageVariation: Float!
 }

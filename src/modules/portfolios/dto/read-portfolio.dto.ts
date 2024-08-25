@@ -14,13 +14,12 @@ export class ReadPortfolioDto {
     const dto = new ReadPortfolioDto();
     dto.id = portfolio.id;
 
-    // Map to store aggregated data per asset
     const assetMap: {
       [key: string]: {
         id: number;
         ticker: string;
         className: string;
-        totalAmount: number;
+        numberOfShares: number;
         cumulativeCost: number; // Used to calculate average price
       };
     } = {};
@@ -33,7 +32,7 @@ export class ReadPortfolioDto {
           id: operation.asset.id,
           ticker: operation.asset.ticker,
           className: operation.asset.class.name,
-          totalAmount: 0,
+          numberOfShares: 0,
           cumulativeCost: 0,
         };
       }
@@ -41,10 +40,10 @@ export class ReadPortfolioDto {
       const assetData = assetMap[assetKey];
 
       if (operation.type === 'BUY') {
-        assetData.totalAmount += operation.quantity;
+        assetData.numberOfShares += operation.quantity;
         assetData.cumulativeCost += operation.quantity * operation.price;
       } else if (operation.type === 'SELL') {
-        assetData.totalAmount -= operation.quantity;
+        assetData.numberOfShares -= operation.quantity;
         assetData.cumulativeCost -= operation.quantity * operation.price;
       }
     });
@@ -52,15 +51,15 @@ export class ReadPortfolioDto {
     // Build the assets array
     dto.assets = Object.values(assetMap)
       // Filter out assets with zero or negative quantity
-      .filter((asset) => asset.totalAmount > 0)
+      .filter((asset) => asset.numberOfShares > 0)
       .map((asset) => {
         const assetDto = new ReadPortfolioAssetDto();
         assetDto.id = asset.id;
         assetDto.ticker = asset.ticker;
         assetDto.className = asset.className;
-        assetDto.totalAmount = asset.totalAmount;
+        assetDto.numberOfShares = asset.numberOfShares;
         assetDto.averagePrice = parseFloat(
-          (asset.cumulativeCost / asset.totalAmount).toFixed(2),
+          (asset.cumulativeCost / asset.numberOfShares).toFixed(2),
         );
         assetDto.cumulativeTotal = asset.cumulativeCost;
         return assetDto;
@@ -75,13 +74,8 @@ export class ReadPortfolioDto {
     return {
       portfolio: {
         assets: dto.assets.map((asset) => ({
+          ...asset,
           id: `${asset.id}`,
-          ticker: asset.ticker,
-          className: asset.className,
-          totalAmount: asset.totalAmount,
-          averagePrice: asset.averagePrice,
-          cumulativeTotal: asset.cumulativeTotal,
-          currentPrice: asset.currentPrice,
         })),
       },
     };

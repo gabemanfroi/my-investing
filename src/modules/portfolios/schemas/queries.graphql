@@ -1,3 +1,6 @@
 extend type Query {
     getUserPortfolio(getUserPortfolioRequest: GetUserPortfolioRequest): GetUserPortfolioResponse!
+    getPortfolioInvestedAmount(getPortfolioInvestedAmountRequest: GetPortfolioInvestedAmountRequest): GetPortfolioInvestedAmountResponse!
+    getPortfolioVariation(getPortfolioVariationRequest: GetPortfolioVariationRequest): GetPortfolioVariationResponse!
 }
+

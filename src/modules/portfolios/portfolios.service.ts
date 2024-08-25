@@ -74,4 +74,23 @@ export class PortfoliosService {
       return ReadPortfolioDto.fromModel(createdPortfolio);
     });
   }
+
+  async getPortfolioInvestedAmount(portfolioId: number) {
+    const portfolio = await this.portfoliosRepository.findOne({
+      where: { id: portfolioId },
+      include: [
+        {
+          model: Operation,
+          include: [{ model: Asset, include: [AssetClass] }],
+        },
+      ],
+    });
+
+    const mappedPortfolio = ReadPortfolioDto.fromModel(portfolio);
+
+    return mappedPortfolio.assets.reduce(
+      (acc, asset) => acc + asset.numberOfShares * asset.averagePrice,
+      0,
+    );
+  }
 }

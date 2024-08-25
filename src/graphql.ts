@@ -55,7 +55,15 @@ export interface RegisterOperationInput {
 }
 
 export interface GetUserPortfolioRequest {
-    userId: number;
+    userId: string;
+}
+
+export interface GetPortfolioInvestedAmountRequest {
+    portfolioId: string;
+}
+
+export interface GetPortfolioVariationRequest {
+    portfolioId: string;
 }
 
 export interface IMutation {
@@ -71,6 +79,8 @@ export interface IQuery {
     listAssets(listAssetsRequest?: Nullable<ListAssetsRequest>): Nullable<ListAssetsResponse> | Promise<Nullable<ListAssetsResponse>>;
     listAssetsClasses(listAssetsClassesRequest: ListAssetsClassesRequest): Nullable<ListAssetsClassesResponse> | Promise<Nullable<ListAssetsClassesResponse>>;
     getUserPortfolio(getUserPortfolioRequest?: Nullable<GetUserPortfolioRequest>): GetUserPortfolioResponse | Promise<GetUserPortfolioResponse>;
+    getPortfolioInvestedAmount(getPortfolioInvestedAmountRequest?: Nullable<GetPortfolioInvestedAmountRequest>): GetPortfolioInvestedAmountResponse | Promise<GetPortfolioInvestedAmountResponse>;
+    getPortfolioVariation(getPortfolioVariationRequest?: Nullable<GetPortfolioVariationRequest>): GetPortfolioVariationResponse | Promise<GetPortfolioVariationResponse>;
 }
 
 export interface AssetClass {
@@ -112,7 +122,7 @@ export interface PortfolioAsset {
     id: string;
     ticker: string;
     className: string;
-    totalAmount: number;
+    numberOfShares: number;
     averagePrice: number;
     cumulativeTotal: number;
     currentPrice?: Nullable<number>;
@@ -124,6 +134,15 @@ export interface Portfolio {
 
 export interface GetUserPortfolioResponse {
     portfolio: Portfolio;
+}
+
+export interface GetPortfolioInvestedAmountResponse {
+    totalInvestedAmount: number;
+}
+
+export interface GetPortfolioVariationResponse {
+    valueVariation: number;
+    percentageVariation: number;
 }
 
 type Nullable<T> = T | null;

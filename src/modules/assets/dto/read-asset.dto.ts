@@ -15,7 +15,7 @@ export class ReadPortfolioAssetDto {
   className: string;
 
   @IsDecimal()
-  totalAmount: number;
+  numberOfShares: number;
 
   @IsDecimal()
   averagePrice: number;
