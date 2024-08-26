@@ -1,4 +1,4 @@
-import { LoginDto } from 'src/modules/auth/dto/login.dto';
+import { LoginDto } from 'src/domain/dto/auth/login.dto';
 import { JwtService } from '@nestjs/jwt';
 import { CommonAuthService } from 'src/infra/core/common-auth/common-auth.service';
 import { UnauthorizedException } from '@nestjs/common';

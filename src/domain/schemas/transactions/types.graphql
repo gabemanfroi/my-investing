@@ -1,0 +1,24 @@
+enum TransactionType {
+    BUY
+    SELL
+}
+
+type Transaction {
+    asset: Asset!
+    price: Float!
+    quantity: Int!
+    createdAt: String!
+    type: TransactionType!
+}
+
+input TransactionInput {
+    assetId: ID!
+    price: Float!
+    quantity: Int!
+    type: TransactionType!
+}
+
+input RegisterTransactionRequest {
+    transaction: TransactionInput!
+    portfolioId: ID!
+}

@@ -3,7 +3,7 @@ import { JwtStrategy } from 'src/infra/strategies/jwt.strategy';
 import { GqlAuthGuard } from 'src/infra/guards/gql.auth.guard';
 import { PassportModule } from '@nestjs/passport';
 import { CommonAuthService } from './common-auth.service';
-import { UsersModule } from 'src/modules/users/users.module';
+import { UsersModule } from 'src/infra/modules/users.module';
 
 @Module({
   imports: [UsersModule, PassportModule.register({ defaultStrategy: 'jwt' })],

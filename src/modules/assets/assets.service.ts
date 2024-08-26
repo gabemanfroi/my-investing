@@ -1,7 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Asset, AssetClass } from 'src/domain/entity/asset.entity';
 import { Op } from 'sequelize';
-import { Sequelize } from 'sequelize-typescript';
 import { ReadAssetClassDto } from 'src/domain/dto/assets/read-asset-class.dto';
 
 @Injectable()
@@ -11,8 +10,6 @@ export class AssetsService {
     private readonly assetsRepository: typeof Asset,
     @Inject('ASSETS_CLASS_REPOSITORY')
     private readonly assetsClassRepository: typeof AssetClass,
-    @Inject('SEQUELIZE')
-    private readonly sequelize: Sequelize,
   ) {}
 
   async listAssetsClasses(query: string) {

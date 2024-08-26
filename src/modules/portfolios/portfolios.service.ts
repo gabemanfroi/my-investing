@@ -1,12 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Sequelize } from 'sequelize-typescript';
-import { Operation } from 'src/modules/transactions/operation.entity';
-import { ReadPortfolioDto } from 'src/modules/portfolios/dto/read-portfolio.dto';
-import { Portfolio } from 'src/modules/portfolios/portfolio.entity';
+import { Transaction } from 'src/modules/transactions/operation.entity';
+import { ReadPortfolioDto } from 'src/domain/dto/portfolios/read-portfolio.dto';
+import { Portfolio } from 'src/domain/entity/portfolio.entity';
 import { Asset, AssetClass } from 'src/domain/entity/asset.entity';
 import { StockMarketService } from 'src/modules/stock-market/interfaces/stock-market.service';
 import { OnEvent } from '@nestjs/event-emitter';
-import { User } from 'src/modules/users/user.entity';
+import { User } from 'src/domain/entity/user.entity';
 
 @Injectable()
 export class PortfoliosService {
@@ -29,7 +29,7 @@ export class PortfoliosService {
       where: { userId },
       include: [
         {
-          model: Operation,
+          model: Transaction,
           include: [{ model: Asset, include: [AssetClass] }],
         },
       ],
@@ -71,7 +71,7 @@ export class PortfoliosService {
           transaction,
           include: [
             {
-              model: Operation,
+              model: Transaction,
               include: [{ model: Asset, include: [AssetClass] }],
             },
           ],
@@ -87,7 +87,7 @@ export class PortfoliosService {
       where: { id: portfolioId },
       include: [
         {
-          model: Operation,
+          model: Transaction,
           include: [{ model: Asset, include: [AssetClass] }],
         },
       ],
@@ -109,7 +109,7 @@ export class PortfoliosService {
       where: { id: portfolioId },
       include: [
         {
-          model: Operation,
+          model: Transaction,
           include: [{ model: Asset, include: [AssetClass] }],
         },
       ],

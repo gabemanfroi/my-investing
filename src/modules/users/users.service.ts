@@ -1,7 +1,7 @@
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
-import { SignUpDto } from 'src/modules/users/dto/sign-up.dto';
+import { SignUpDto } from 'src/domain/dto/users/sign-up.dto';
 import { hash } from 'bcrypt';
-import { User } from 'src/modules/users/user.entity';
+import { User } from 'src/domain/entity/user.entity';
 import { JwtService } from '@nestjs/jwt';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 

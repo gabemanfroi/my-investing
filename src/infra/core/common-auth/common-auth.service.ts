@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { User } from 'src/modules/users/user.entity';
+import { User } from 'src/domain/entity/user.entity';
 import { compare } from 'bcrypt';
-import { Portfolio } from 'src/modules/portfolios/portfolio.entity';
+import { Portfolio } from 'src/domain/entity/portfolio.entity';
 
 @Injectable()
 export class CommonAuthService {

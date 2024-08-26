@@ -6,7 +6,7 @@ import { plainToInstance } from 'class-transformer';
 import { ReadIndustryDto } from 'src/domain/dto/assets/read-industry.dto';
 import { ReadSectorDto } from 'src/domain/dto/assets/read-sector.dto';
 import { ReadExchangeDto } from 'src/domain/dto/assets/read-exchange.dto';
-import { ReadCurrencyDto } from 'src/domain/dto/currency/read-currency.dto';
+import { ReadCurrencyDto } from 'src/domain/dto/currencies/read-currency.dto';
 
 export class ReadPortfolioAssetDto {
   @IsNumber()

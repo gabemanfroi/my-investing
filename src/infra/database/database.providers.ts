@@ -6,11 +6,11 @@ import {
   Industry,
   Sector,
 } from 'src/domain/entity/asset.entity';
-import { User } from 'src/modules/users/user.entity';
-import { Portfolio } from 'src/modules/portfolios/portfolio.entity';
-import { Operation } from 'src/modules/transactions/operation.entity';
+import { User } from 'src/domain/entity/user.entity';
+import { Portfolio } from 'src/domain/entity/portfolio.entity';
+import { Transaction } from 'src/modules/transactions/operation.entity';
 import { AppConfigService } from 'src/infra/config/app-config.service';
-import { Currency } from 'src/modules/shared/entities/currency.entity';
+import { Currency } from 'src/domain/entity/currency.entity';
 
 export const databaseProviders = [
   {
@@ -32,7 +32,7 @@ export const databaseProviders = [
         Asset,
         User,
         Portfolio,
-        Operation,
+        Transaction,
         Currency,
         Sector,
         Exchange,

@@ -6,9 +6,9 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
-import { Operation } from 'src/modules/transactions/operation.entity';
 import { InferAttributes, InferCreationAttributes } from 'sequelize';
-import { Currency } from 'src/modules/shared/entities/currency.entity';
+import { Currency } from 'src/domain/entity/currency.entity';
+import { Transaction } from 'src/domain/entity/transaction.entity';
 
 @Table
 export class AssetClass extends Model<
@@ -111,6 +111,6 @@ export class Asset extends Model<
   @BelongsTo(() => Currency)
   currency: Currency;
 
-  @HasMany(() => Operation)
-  operations: Operation[];
+  @HasMany(() => Transaction)
+  transactions: Transaction[];
 }
