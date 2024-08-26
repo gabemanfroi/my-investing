@@ -4,7 +4,7 @@ import { plainToInstance } from 'class-transformer';
 
 export class CreateAssetDto {
   @IsString()
-  ticker: string;
+  symbol: string;
 
   @IsNumber()
   assetClassId: number;
@@ -13,7 +13,7 @@ export class CreateAssetDto {
     createAssetInput: CreateAssetInput,
   ): CreateAssetDto {
     return plainToInstance(CreateAssetDto, {
-      ticker: createAssetInput.ticker,
+      symbol: createAssetInput.symbol,
       assetClassId: Number(createAssetInput.assetClassId),
     });
   }

@@ -9,7 +9,7 @@ export class ReadPortfolioAssetDto {
   id: number;
 
   @IsString()
-  ticker: string;
+  symbol: string;
 
   @IsString()
   className: string;
@@ -32,7 +32,7 @@ export class ReadAssetDto {
   id: number;
 
   @IsString()
-  ticker: string;
+  symbol: string;
 
   @IsInstance(ReadAssetClassDto)
   class: ReadAssetClassDto;
@@ -40,7 +40,7 @@ export class ReadAssetDto {
   static fromModel(asset: Asset): ReadAssetDto {
     return plainToInstance(ReadAssetDto, {
       id: Number(asset.id),
-      ticker: asset.ticker,
+      symbol: asset.symbol,
       class: ReadAssetClassDto.fromModel(asset.class),
     });
   }
@@ -54,7 +54,7 @@ export class ReadAssetDto {
       assets: assets.map((a) => {
         return {
           id: String(a.id),
-          ticker: a.ticker,
+          symbol: a.symbol,
           class: {
             id: String(a.class.id),
             name: a.class.name,

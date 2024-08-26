@@ -31,7 +31,7 @@ export class Asset extends Model<
   @Column({
     unique: true,
   })
-  ticker: string;
+  symbol: string;
 
   @ForeignKey(() => AssetClass)
   @Column

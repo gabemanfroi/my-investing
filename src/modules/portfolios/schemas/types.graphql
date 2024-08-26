@@ -1,6 +1,6 @@
 type PortfolioAsset {
     id: ID!
-    ticker: String!
+    symbol: String!
     className: String!
     numberOfShares: Int!
     averagePrice: Float!

@@ -14,7 +14,7 @@ export enum OperationType {
 }
 
 export interface CreateAssetInput {
-    ticker: string;
+    symbol: string;
     assetClassId: string;
 }
 
@@ -90,7 +90,7 @@ export interface AssetClass {
 
 export interface Asset {
     id: string;
-    ticker: string;
+    symbol: string;
     class: AssetClass;
 }
 
@@ -116,7 +116,7 @@ export interface Operation {
 
 export interface PortfolioAsset {
     id: string;
-    ticker: string;
+    symbol: string;
     className: string;
     numberOfShares: number;
     averagePrice: number;

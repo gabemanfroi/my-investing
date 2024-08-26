@@ -1,3 +1,3 @@
 export interface StockMarketService {
-  getStockPrice(ticker: string): Promise<number>;
+  getStockPrice(symbol: string): Promise<number>;
 }

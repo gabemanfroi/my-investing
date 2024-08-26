@@ -36,16 +36,16 @@ export class StockMarketBrapiService implements StockMarketService {
     private readonly appConfigService: AppConfigService,
   ) {}
 
-  async getStockPrice(ticker: string): Promise<number> {
+  async getStockPrice(symbol: string): Promise<number> {
     const { results } = await this.httpService
-      .get<BrapiQuoteResponse>(this.getTickerUrl(ticker))
+      .get<BrapiQuoteResponse>(this.getTickerUrl(symbol))
       .pipe(map((response) => response.data as BrapiQuoteResponse))
       .toPromise();
 
     return results[0].regularMarketPrice;
   }
 
-  private getTickerUrl(ticker: string): string {
-    return `${this.appConfigService.brapiApiHost}/quote/${ticker}?token=${this.appConfigService.brapiApiKey}`;
+  private getTickerUrl(symbol: string): string {
+    return `${this.appConfigService.brapiApiHost}/quote/${symbol}?token=${this.appConfigService.brapiApiKey}`;
   }
 }

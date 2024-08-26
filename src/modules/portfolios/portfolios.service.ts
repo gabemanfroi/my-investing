@@ -40,7 +40,7 @@ export class PortfoliosService {
     const assetsWithCurrentPrices = await Promise.all(
       mappedPortfolio.assets.map(async (asset) => {
         const currentPrice = await this.stockMarketService.getStockPrice(
-          asset.ticker,
+          asset.symbol,
         );
         return {
           ...asset,
@@ -125,7 +125,7 @@ export class PortfoliosService {
     const currentPortfolioValue = await Promise.all(
       mappedPortfolio.assets.map(async (asset) => {
         const currentPrice = await this.stockMarketService.getStockPrice(
-          asset.ticker,
+          asset.symbol,
         );
         return currentPrice * asset.numberOfShares;
       }),
@@ -137,10 +137,15 @@ export class PortfoliosService {
     );
 
     return {
-      valueVariation: totalPortfolioValue - totalInvestedAmount,
-      percentageVariation:
-        ((totalPortfolioValue - totalInvestedAmount) / totalInvestedAmount) *
-        100,
+      valueVariation: parseFloat(
+        (totalPortfolioValue - totalInvestedAmount).toFixed(2),
+      ),
+      percentageVariation: Number(
+        (
+          ((totalPortfolioValue - totalInvestedAmount) / totalInvestedAmount) *
+          100
+        ).toFixed(2),
+      ),
     };
   }
 }

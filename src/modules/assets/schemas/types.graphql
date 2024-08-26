@@ -5,12 +5,12 @@ type AssetClass {
 
 type Asset {
     id: ID!
-    ticker: String!
+    symbol: String!
     class: AssetClass!
 }
 
 input CreateAssetInput {
-    ticker: String!
+    symbol: String!
     assetClassId: ID!
 }
 

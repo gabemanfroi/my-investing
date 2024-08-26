@@ -4,7 +4,7 @@ import { ReadAssetDto } from 'src/modules/assets/dto/read-asset.dto';
 
 class MockAsset {
   id: number;
-  ticker: string;
+  symbol: string;
   class: {
     id: number;
     name: string;
@@ -15,7 +15,7 @@ describe('ReadAssetDto', () => {
   it('should validate the fields correctly', async () => {
     const dto = new ReadAssetDto();
     dto.id = 1;
-    dto.ticker = 'AAPL';
+    dto.symbol = 'AAPL';
     dto.class = new ReadAssetClassDto();
     dto.class.id = 1;
     dto.class.name = 'Equity';
@@ -37,14 +37,14 @@ describe('ReadAssetDto', () => {
   it('should convert an Asset model to ReadAssetDto', () => {
     const asset = new MockAsset();
     asset.id = 1;
-    asset.ticker = 'AAPL';
+    asset.symbol = 'AAPL';
     asset.class = { id: 1, name: 'Equity' } as any; // Mocking class
 
     const dto = ReadAssetDto.fromModel(asset as any);
 
     expect(dto).toBeInstanceOf(ReadAssetDto);
     expect(dto.id).toBe(1);
-    expect(dto.ticker).toBe('AAPL');
+    expect(dto.symbol).toBe('AAPL');
     expect(dto.class.id).toBe(1);
     expect(dto.class.name).toBe('Equity');
   });
@@ -52,12 +52,12 @@ describe('ReadAssetDto', () => {
   it('should convert an array of Asset models to ReadAssetDto[]', () => {
     const asset1: any = new MockAsset();
     asset1.id = 1;
-    asset1.ticker = 'AAPL';
+    asset1.symbol = 'AAPL';
     asset1.class = { id: 1, name: 'Equity' } as any;
 
     const asset2 = new MockAsset();
     asset2.id = 2;
-    asset2.ticker = 'TSLA';
+    asset2.symbol = 'TSLA';
     asset2.class = { id: 2, name: 'Equity' } as any;
 
     const dtos = ReadAssetDto.manyFromModel([asset1, asset2]);
@@ -70,12 +70,12 @@ describe('ReadAssetDto', () => {
   it('should convert ReadAssetDto[] to ListAssetsResponse', () => {
     const dto1 = new ReadAssetDto();
     dto1.id = 1;
-    dto1.ticker = 'AAPL';
+    dto1.symbol = 'AAPL';
     dto1.class = { id: 1, name: 'Equity' };
 
     const dto2 = new ReadAssetDto();
     dto2.id = 2;
-    dto2.ticker = 'TSLA';
+    dto2.symbol = 'TSLA';
     dto2.class = { id: 2, name: 'Equity' };
 
     const response = ReadAssetDto.toListAssetsResponse([dto1, dto2]);

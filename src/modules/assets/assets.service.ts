@@ -22,8 +22,8 @@ export class AssetsService {
     return this.sequelize.transaction(async (transaction) => {
       const existingAsset = await this.assetsRepository.findOne({
         where: {
-          ticker: {
-            [Op.iLike]: dto.ticker.toLowerCase(),
+          symbol: {
+            [Op.iLike]: dto.symbol.toLowerCase(),
           },
         },
         transaction,
@@ -65,7 +65,7 @@ export class AssetsService {
   async listAssets(query: string) {
     const assets = await this.assetsRepository.findAll({
       where: {
-        ticker: {
+        symbol: {
           [Op.iLike]: `%${query.toLowerCase()}%`,
         },
       },

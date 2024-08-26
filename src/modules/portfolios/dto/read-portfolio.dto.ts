@@ -17,7 +17,7 @@ export class ReadPortfolioDto {
     const assetMap: {
       [key: string]: {
         id: number;
-        ticker: string;
+        symbol: string;
         className: string;
         numberOfShares: number;
         cumulativeCost: number; // Used to calculate average price
@@ -30,7 +30,7 @@ export class ReadPortfolioDto {
       if (!assetMap[assetKey]) {
         assetMap[assetKey] = {
           id: operation.asset.id,
-          ticker: operation.asset.ticker,
+          symbol: operation.asset.symbol,
           className: operation.asset.class.name,
           numberOfShares: 0,
           cumulativeCost: 0,
@@ -55,7 +55,7 @@ export class ReadPortfolioDto {
       .map((asset) => {
         const assetDto = new ReadPortfolioAssetDto();
         assetDto.id = asset.id;
-        assetDto.ticker = asset.ticker;
+        assetDto.symbol = asset.symbol;
         assetDto.className = asset.className;
         assetDto.numberOfShares = asset.numberOfShares;
         assetDto.averagePrice = parseFloat(
