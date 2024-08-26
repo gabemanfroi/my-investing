@@ -1,12 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Sequelize } from 'sequelize-typescript';
-import { Transaction } from 'src/modules/transactions/operation.entity';
 import { ReadPortfolioDto } from 'src/domain/dto/portfolios/read-portfolio.dto';
 import { Portfolio } from 'src/domain/entity/portfolio.entity';
 import { Asset, AssetClass } from 'src/domain/entity/asset.entity';
 import { StockMarketService } from 'src/modules/stock-market/interfaces/stock-market.service';
 import { OnEvent } from '@nestjs/event-emitter';
 import { User } from 'src/domain/entity/user.entity';
+import { Transaction } from 'src/domain/entity/transaction.entity';
 
 @Injectable()
 export class PortfoliosService {

@@ -8,9 +8,9 @@ import {
 } from 'src/domain/entity/asset.entity';
 import { User } from 'src/domain/entity/user.entity';
 import { Portfolio } from 'src/domain/entity/portfolio.entity';
-import { Transaction } from 'src/modules/transactions/operation.entity';
 import { AppConfigService } from 'src/infra/config/app-config.service';
 import { Currency } from 'src/domain/entity/currency.entity';
+import { Transaction } from 'src/domain/entity/transaction.entity';
 
 export const databaseProviders = [
   {

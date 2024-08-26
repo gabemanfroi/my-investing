@@ -4,11 +4,12 @@ import { hash } from 'bcrypt';
 import { User } from 'src/domain/entity/user.entity';
 import { JwtService } from '@nestjs/jwt';
 import { EventEmitter2 } from '@nestjs/event-emitter';
+import { USER_REPOSITORY } from 'src/infra/providers/users.providers';
 
 @Injectable()
 export class UsersService {
   constructor(
-    @Inject('USER_REPOSITORY')
+    @Inject(USER_REPOSITORY)
     private readonly userRepository: typeof User,
     private readonly jwtService: JwtService,
     private readonly eventEmitter: EventEmitter2,

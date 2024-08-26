@@ -1,15 +1,15 @@
 import { Asset, AssetClass } from 'src/domain/entity/asset.entity';
 
-const AssetsRepositoryToken = 'ASSETS_REPOSITORY';
-const AssetsClassRepositoryToken = 'ASSETS_CLASS_REPOSITORY';
+export const ASSETS_REPOSITORY = 'ASSETS_REPOSITORY';
+export const ASSETS_CLASS_REPOSITORY = 'ASSETS_CLASS_REPOSITORY';
 
 export const assetsProviders = [
   {
-    provide: AssetsRepositoryToken,
+    provide: ASSETS_REPOSITORY,
     useValue: Asset,
   },
   {
-    provide: AssetsClassRepositoryToken,
+    provide: ASSETS_CLASS_REPOSITORY,
     useValue: AssetClass,
   },
 ];

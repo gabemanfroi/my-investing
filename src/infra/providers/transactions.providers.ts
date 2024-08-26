@@ -1,6 +1,6 @@
 import { Transaction } from 'sequelize';
 
-const TRANSACTIONS_REPOSITORY = 'TRANSACTIONS_REPOSITORY';
+export const TRANSACTIONS_REPOSITORY = 'TRANSACTIONS_REPOSITORY';
 
 export const transactionsProviders = [
   {
