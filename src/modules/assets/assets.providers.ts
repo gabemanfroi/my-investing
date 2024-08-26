@@ -1,4 +1,4 @@
-import { Asset, AssetClass } from 'src/modules/assets/asset.entity';
+import { Asset, AssetClass } from 'src/domain/entity/asset.entity';
 
 export const assetsProviders = [
   {

@@ -1,5 +1,5 @@
 import { IsNumber, IsString } from 'class-validator';
-import { AssetClass } from 'src/modules/assets/asset.entity';
+import { AssetClass } from 'src/domain/entity/asset.entity';
 import { ListAssetsClassesResponse } from 'src/graphql';
 import { plainToInstance } from 'class-transformer';
 

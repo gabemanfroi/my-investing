@@ -1,9 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Sequelize } from 'sequelize-typescript';
-import { Operation } from 'src/modules/operations/operation.entity';
+import { Operation } from 'src/modules/transactions/operation.entity';
 import { ReadPortfolioDto } from 'src/modules/portfolios/dto/read-portfolio.dto';
 import { Portfolio } from 'src/modules/portfolios/portfolio.entity';
-import { Asset, AssetClass } from 'src/modules/assets/asset.entity';
+import { Asset, AssetClass } from 'src/domain/entity/asset.entity';
 import { StockMarketService } from 'src/modules/stock-market/interfaces/stock-market.service';
 import { OnEvent } from '@nestjs/event-emitter';
 import { User } from 'src/modules/users/user.entity';

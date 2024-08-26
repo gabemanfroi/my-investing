@@ -1,7 +1,7 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { OperationsService } from 'src/modules/operations/operations.service';
+import { OperationsService } from 'src/modules/transactions/operations.service';
 import { RegisterOperationInput } from 'src/graphql';
-import { OperationsMappers } from 'src/modules/operations/operations.mappers';
+import { OperationsMappers } from 'src/modules/transactions/operations.mappers';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from 'src/infra/guards/gql.auth.guard';
 

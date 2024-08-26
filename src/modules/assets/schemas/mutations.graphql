@@ -1,4 +1,0 @@
-extend type Mutation {
-    createAssetClass(createAssetClassInput: CreateAssetClassInput): Boolean!
-    createAsset(createAssetInput: CreateAssetInput): Boolean!
-}

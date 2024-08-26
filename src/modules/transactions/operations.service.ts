@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Operation } from 'src/modules/operations/operation.entity';
-import { CreateOperationDto } from 'src/modules/operations/dto/create-operation.dto';
+import { Operation } from 'src/modules/transactions/operation.entity';
+import { CreateOperationDto } from 'src/modules/transactions/dto/create-operation.dto';
 
 @Injectable()
 export class OperationsService {

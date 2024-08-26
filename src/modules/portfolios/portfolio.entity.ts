@@ -7,7 +7,7 @@ import {
   Table,
 } from 'sequelize-typescript';
 import { User } from 'src/modules/users/user.entity';
-import { Operation } from 'src/modules/operations/operation.entity';
+import { Operation } from 'src/modules/transactions/operation.entity';
 import { InferAttributes, InferCreationAttributes } from 'sequelize';
 
 @Table

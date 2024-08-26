@@ -1,4 +1,4 @@
-import { Operation } from 'src/modules/operations/operation.entity';
+import { Operation } from 'src/modules/transactions/operation.entity';
 
 export const operationsProviders = [
   {

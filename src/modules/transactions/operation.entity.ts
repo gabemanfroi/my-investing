@@ -8,7 +8,7 @@ import {
   PrimaryKey,
   Table,
 } from 'sequelize-typescript';
-import { Asset } from 'src/modules/assets/asset.entity';
+import { Asset } from 'src/domain/entity/asset.entity';
 import { Portfolio } from 'src/modules/portfolios/portfolio.entity';
 import { InferAttributes, InferCreationAttributes } from 'sequelize';
 

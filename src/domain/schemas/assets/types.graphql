@@ -1,3 +1,18 @@
+type Industry {
+    id: ID!
+    name: String!
+}
+
+type Sector {
+    id: ID!
+    name: String!
+}
+
+type Exchange {
+    id: ID!
+    name: String!
+}
+
 type AssetClass {
     id: ID!
     name: String!
@@ -7,15 +22,10 @@ type Asset {
     id: ID!
     symbol: String!
     class: AssetClass!
-}
-
-input CreateAssetInput {
-    symbol: String!
-    assetClassId: ID!
-}
-
-input CreateAssetClassInput {
-    name: String!
+    sector: Sector!
+    industry: Industry!
+    exchange: Exchange!
+    currency: Currency!
 }
 
 input ListAssetsRequest {

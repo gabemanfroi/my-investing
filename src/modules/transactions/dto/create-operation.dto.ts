@@ -1,5 +1,5 @@
 import { IsEnum, IsNumber } from 'class-validator';
-import { OperationType } from 'src/modules/operations/operation.entity';
+import { OperationType } from 'src/modules/transactions/operation.entity';
 
 export class CreateOperationDto {
   @IsNumber()

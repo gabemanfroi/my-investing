@@ -1,6 +1,6 @@
 import { IsArray, IsNumber } from 'class-validator';
 import { GetUserPortfolioResponse } from 'src/graphql';
-import { ReadPortfolioAssetDto } from 'src/modules/assets/dto/read-asset.dto';
+import { ReadPortfolioAssetDto } from 'src/domain/dto/assets/read-asset.dto';
 import { Portfolio } from 'src/modules/portfolios/portfolio.entity';
 
 export class ReadPortfolioDto {

@@ -1,5 +1,5 @@
 import { RegisterOperationInput } from 'src/graphql';
-import { CreateOperationDto } from 'src/modules/operations/dto/create-operation.dto';
+import { CreateOperationDto } from 'src/modules/transactions/dto/create-operation.dto';
 import { plainToInstance } from 'class-transformer';
 
 export class OperationsMappers {

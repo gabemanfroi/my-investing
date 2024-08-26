@@ -13,15 +13,6 @@ export enum OperationType {
     SELL = "SELL"
 }
 
-export interface CreateAssetInput {
-    symbol: string;
-    assetClassId: string;
-}
-
-export interface CreateAssetClassInput {
-    name: string;
-}
-
 export interface ListAssetsRequest {
     query: string;
 }
@@ -33,18 +24,6 @@ export interface ListAssetsClassesRequest {
 export interface LoginRequest {
     email: string;
     password: string;
-}
-
-export interface OperationInput {
-    assetId: string;
-    price: number;
-    quantity: number;
-    type: OperationType;
-}
-
-export interface RegisterOperationInput {
-    operation: OperationInput;
-    portfolioId: string;
 }
 
 export interface GetUserPortfolioRequest {
@@ -59,20 +38,23 @@ export interface GetPortfolioVariationRequest {
     portfolioId: string;
 }
 
+export interface OperationInput {
+    assetId: string;
+    price: number;
+    quantity: number;
+    type: OperationType;
+}
+
+export interface RegisterOperationInput {
+    operation: OperationInput;
+    portfolioId: string;
+}
+
 export interface SignUpRequest {
     email: string;
     password: string;
     firstName: string;
     lastName: string;
-}
-
-export interface IMutation {
-    createAssetClass(createAssetClassInput?: Nullable<CreateAssetClassInput>): boolean | Promise<boolean>;
-    createAsset(createAssetInput?: Nullable<CreateAssetInput>): boolean | Promise<boolean>;
-    login(loginRequest: LoginRequest): LoginResponse | Promise<LoginResponse>;
-    registerOperation(registerOperationInput?: Nullable<RegisterOperationInput>): boolean | Promise<boolean>;
-    createPortfolio(): boolean | Promise<boolean>;
-    signUp(signUpRequest: SignUpRequest): SignUpResponse | Promise<SignUpResponse>;
 }
 
 export interface IQuery {
@@ -81,6 +63,21 @@ export interface IQuery {
     getUserPortfolio(getUserPortfolioRequest?: Nullable<GetUserPortfolioRequest>): GetUserPortfolioResponse | Promise<GetUserPortfolioResponse>;
     getPortfolioInvestedAmount(getPortfolioInvestedAmountRequest?: Nullable<GetPortfolioInvestedAmountRequest>): GetPortfolioInvestedAmountResponse | Promise<GetPortfolioInvestedAmountResponse>;
     getPortfolioVariation(getPortfolioVariationRequest?: Nullable<GetPortfolioVariationRequest>): GetPortfolioVariationResponse | Promise<GetPortfolioVariationResponse>;
+}
+
+export interface Industry {
+    id: string;
+    name: string;
+}
+
+export interface Sector {
+    id: string;
+    name: string;
+}
+
+export interface Exchange {
+    id: string;
+    name: string;
 }
 
 export interface AssetClass {
@@ -92,6 +89,10 @@ export interface Asset {
     id: string;
     symbol: string;
     class: AssetClass;
+    sector: Sector;
+    industry: Industry;
+    exchange: Exchange;
+    currency: Currency;
 }
 
 export interface ListAssetsResponse {
@@ -102,16 +103,21 @@ export interface ListAssetsClassesResponse {
     assetClasses: Nullable<AssetClass>[];
 }
 
-export interface LoginResponse {
-    token: string;
+export interface Currency {
+    id: string;
+    name: string;
+    symbol: string;
 }
 
-export interface Operation {
-    asset: Asset;
-    price: number;
-    quantity: number;
-    createdAt: string;
-    type: OperationType;
+export interface IMutation {
+    login(loginRequest: LoginRequest): LoginResponse | Promise<LoginResponse>;
+    createPortfolio(): boolean | Promise<boolean>;
+    registerOperation(registerOperationInput?: Nullable<RegisterOperationInput>): boolean | Promise<boolean>;
+    signUp(signUpRequest: SignUpRequest): SignUpResponse | Promise<SignUpResponse>;
+}
+
+export interface LoginResponse {
+    token: string;
 }
 
 export interface PortfolioAsset {
@@ -140,6 +146,14 @@ export interface GetPortfolioInvestedAmountResponse {
 export interface GetPortfolioVariationResponse {
     valueVariation: number;
     percentageVariation: number;
+}
+
+export interface Operation {
+    asset: Asset;
+    price: number;
+    quantity: number;
+    createdAt: string;
+    type: OperationType;
 }
 
 export interface SignUpResponse {

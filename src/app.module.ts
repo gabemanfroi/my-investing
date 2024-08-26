@@ -8,7 +8,7 @@ import * as path from 'node:path';
 import { AssetsModule } from 'src/modules/assets/assets.module';
 import { UsersModule } from 'src/modules/users/users.module';
 import { PortfoliosModule } from 'src/modules/portfolios/portfolios.module';
-import { OperationsModule } from 'src/modules/operations/operations.module';
+import { OperationsModule } from 'src/modules/transactions/operations.module';
 import { StockMarketModule } from './modules/stock-market/stock-market.module';
 import { AppConfigModule } from 'src/infra/config/app-config.module';
 import { AuthModule } from 'src/modules/auth/auth.module';

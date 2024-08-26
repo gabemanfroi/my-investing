@@ -1,6 +1,6 @@
 import { validate } from 'class-validator';
-import { ReadAssetClassDto } from 'src/modules/assets/dto/read-asset-class.dto';
-import { ReadAssetDto } from 'src/modules/assets/dto/read-asset.dto';
+import { ReadAssetClassDto } from 'src/domain/dto/assets/read-asset-class.dto';
+import { ReadAssetDto } from 'src/domain/dto/assets/read-asset.dto';
 
 class MockAsset {
   id: number;

@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { OperationsResolvers } from 'src/modules/operations/operations.resolvers';
-import { OperationsService } from 'src/modules/operations/operations.service';
+import { OperationsResolvers } from 'src/modules/transactions/operations.resolvers';
+import { OperationsService } from 'src/modules/transactions/operations.service';
 import { OperationType, RegisterOperationInput } from 'src/graphql';
 
 describe('OperationsResolvers', () => {

@@ -5,6 +5,10 @@ import { AuthResolvers } from 'src/modules/auth/auth.resolvers';
 import { AppConfigService } from 'src/infra/config/app-config.service';
 import { AppConfigModule } from 'src/infra/config/app-config.module';
 import { CommonAuthModule } from 'src/infra/core/common-auth/common-auth.module';
+import {
+  ILoginUseCaseToken,
+  LoginUseCase,
+} from 'src/application/useCases/auth/login.use-case';
 
 @Module({
   imports: [
@@ -21,7 +25,14 @@ import { CommonAuthModule } from 'src/infra/core/common-auth/common-auth.module'
       },
     }),
   ],
-  providers: [AuthService, AuthResolvers],
+  providers: [
+    AuthService,
+    AuthResolvers,
+    {
+      provide: ILoginUseCaseToken,
+      useClass: LoginUseCase,
+    },
+  ],
   exports: [AuthService],
 })
 export class AuthModule {}

@@ -1,6 +1,6 @@
 import { validate } from 'class-validator';
-import { AssetClass } from 'src/modules/assets/asset.entity';
-import { ReadAssetClassDto } from 'src/modules/assets/dto/read-asset-class.dto'; // Adjust path as necessary
+import { AssetClass } from 'src/domain/entity/asset.entity';
+import { ReadAssetClassDto } from 'src/domain/dto/assets/read-asset-class.dto'; // Adjust path as necessary
 
 describe('ReadAssetClassDto', () => {
   it('should validate the fields correctly', async () => {
