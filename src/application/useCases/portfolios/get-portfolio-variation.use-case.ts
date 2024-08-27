@@ -1,48 +1,27 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Sequelize } from 'sequelize-typescript';
-import { ReadPortfolioDto } from 'src/domain/dto/portfolios/read-portfolio.dto';
 import { Portfolio } from 'src/domain/entity/portfolio.entity';
-import { Asset, AssetClass } from 'src/domain/entity/asset.entity';
-import { IStockMarketService } from 'src/modules/stock-market/interfaces/stock-market.service';
 import { Transaction } from 'src/domain/entity/transaction.entity';
+import { Asset, AssetClass } from 'src/domain/entity/asset.entity';
+import { PORTFOLIOS_REPOSITORY } from 'src/infra/providers/portfolios/portfolios.repositories.providers';
 import {
-  CREATE_PORTFOLIO_USE_CASE,
-  ICreatePortfolioUseCase,
-} from 'src/domain/interfaces/use-cases/portfolios/create-portfolio.use-case.interface';
+  IStockMarketService,
+  STOCK_MARKET_SERVICE,
+} from 'src/modules/stock-market/interfaces/stock-market.service';
+import { ReadPortfolioDto } from 'src/domain/dto/portfolios/read-portfolio.dto';
+import { IGetPortfolioVariationUseCase } from 'src/domain/interfaces/use-cases/portfolios/get-portfolio-variation.use-case.interface';
 
 @Injectable()
-export class PortfoliosService {
+export class GetPortfolioVariationUseCase
+  implements IGetPortfolioVariationUseCase
+{
   constructor(
-    @Inject('PORTFOLIOS_REPOSITORY')
+    @Inject(PORTFOLIOS_REPOSITORY)
     private readonly portfoliosRepository: typeof Portfolio,
-    @Inject('SEQUELIZE')
-    private readonly sequelize: Sequelize,
-    @Inject('StockMarketService')
+    @Inject(STOCK_MARKET_SERVICE)
     private readonly stockMarketService: IStockMarketService,
-    @Inject(CREATE_PORTFOLIO_USE_CASE)
-    private readonly createPortfolioUseCase: ICreatePortfolioUseCase,
   ) {}
 
-  async getPortfolioInvestedAmount(portfolioId: number) {
-    const portfolio = await this.portfoliosRepository.findOne({
-      where: { id: portfolioId },
-      include: [
-        {
-          model: Transaction,
-          include: [{ model: Asset, include: [AssetClass] }],
-        },
-      ],
-    });
-
-    const mappedPortfolio = ReadPortfolioDto.fromModel(portfolio);
-
-    return mappedPortfolio.assets.reduce(
-      (acc, asset) => acc + asset.numberOfShares * asset.averagePrice,
-      0,
-    );
-  }
-
-  async getPortfolioVariation(portfolioId: string): Promise<{
+  async execute(portfolioId: string): Promise<{
     valueVariation: number;
     percentageVariation: number;
   }> {
@@ -56,7 +35,7 @@ export class PortfoliosService {
       ],
     });
 
-    const mappedPortfolio = ReadPortfolioDto.fromModel(portfolio);
+    const mappedPortfolio = ReadPortfolioDto.fromModel(portfolio); // Assuming you have a method to map the entity to DTO
 
     const totalInvestedAmount = mappedPortfolio.assets.reduce(
       (acc, asset) => acc + asset.numberOfShares * asset.averagePrice,

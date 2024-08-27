@@ -16,12 +16,24 @@ import {
   GET_USER_PORTFOLIO_USE_CASE,
   IGetUserPortfolioUseCase,
 } from 'src/domain/interfaces/use-cases/portfolios/get-user-portfolio.use-case.interface';
+import {
+  GET_PORTFOLIO_INVESTED_AMOUNT_USE_CASE,
+  IGetPortfolioInvestedAmountUseCase,
+} from 'src/domain/interfaces/use-cases/portfolios/get-portfolio-invested-amount.use-case.interface';
+import {
+  GET_PORTFOLIO_VARIATION_USE_CASE,
+  IGetPortfolioVariationUseCase,
+} from 'src/application/useCases/portfolios/get-portfolio-variation.use-case';
 
 @Resolver('Portfolios')
 export class PortfoliosResolver {
   constructor(
     @Inject(GET_USER_PORTFOLIO_USE_CASE)
     private readonly getUserPortfolioUseCase: IGetUserPortfolioUseCase,
+    @Inject(GET_PORTFOLIO_INVESTED_AMOUNT_USE_CASE)
+    private readonly getPortfolioInvestedAmountUseCase: IGetPortfolioInvestedAmountUseCase,
+    @Inject(GET_PORTFOLIO_VARIATION_USE_CASE)
+    private readonly getPortfolioVariationUseCase: IGetPortfolioVariationUseCase,
     private readonly portfolioService: PortfoliosService,
   ) {}
 
@@ -45,7 +57,7 @@ export class PortfoliosResolver {
     request: GetPortfolioInvestedAmountRequest,
   ): Promise<GetPortfolioInvestedAmountResponse> {
     const totalInvestedAmount =
-      await this.portfolioService.getPortfolioInvestedAmount(
+      await this.getPortfolioInvestedAmountUseCase.execute(
         Number(request.portfolioId),
       );
 
@@ -58,6 +70,6 @@ export class PortfoliosResolver {
     @Args('getPortfolioVariationRequest')
     request: GetPortfolioVariationRequest,
   ): Promise<GetPortfolioVariationResponse> {
-    return this.portfolioService.getPortfolioVariation(request.portfolioId);
+    return this.getPortfolioVariationUseCase.execute(request.portfolioId);
   }
 }
