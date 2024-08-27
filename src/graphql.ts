@@ -13,83 +13,79 @@ export enum TransactionType {
     SELL = "SELL"
 }
 
-export class ListAssetsRequest {
+export interface ListAssetsRequest {
     query: string;
 }
 
-export class ListAssetsClassesRequest {
+export interface ListAssetsClassesRequest {
     query: string;
 }
 
-export class LoginRequest {
+export interface LoginRequest {
     email: string;
     password: string;
 }
 
-export class GetUserPortfolioRequest {
+export interface GetUserPortfolioRequest {
     userId: string;
 }
 
-export class GetPortfolioInvestedAmountRequest {
+export interface GetPortfolioInvestedAmountRequest {
     portfolioId: string;
 }
 
-export class GetPortfolioVariationRequest {
+export interface GetPortfolioVariationRequest {
     portfolioId: string;
 }
 
-export class TransactionInput {
+export interface TransactionInput {
     assetId: string;
     price: number;
     quantity: number;
     type: TransactionType;
 }
 
-export class RegisterTransactionRequest {
+export interface RegisterTransactionRequest {
     transaction: TransactionInput;
     portfolioId: string;
 }
 
-export class SignUpRequest {
+export interface SignUpRequest {
     email: string;
     password: string;
     firstName: string;
     lastName: string;
 }
 
-export abstract class IQuery {
-    abstract listAssets(listAssetsRequest?: Nullable<ListAssetsRequest>): Nullable<ListAssetsResponse> | Promise<Nullable<ListAssetsResponse>>;
-
-    abstract listAssetsClasses(listAssetsClassesRequest: ListAssetsClassesRequest): Nullable<ListAssetsClassesResponse> | Promise<Nullable<ListAssetsClassesResponse>>;
-
-    abstract getUserPortfolio(getUserPortfolioRequest?: Nullable<GetUserPortfolioRequest>): GetUserPortfolioResponse | Promise<GetUserPortfolioResponse>;
-
-    abstract getPortfolioInvestedAmount(getPortfolioInvestedAmountRequest?: Nullable<GetPortfolioInvestedAmountRequest>): GetPortfolioInvestedAmountResponse | Promise<GetPortfolioInvestedAmountResponse>;
-
-    abstract getPortfolioVariation(getPortfolioVariationRequest?: Nullable<GetPortfolioVariationRequest>): GetPortfolioVariationResponse | Promise<GetPortfolioVariationResponse>;
+export interface IQuery {
+    listAssets(listAssetsRequest?: Nullable<ListAssetsRequest>): Nullable<ListAssetsResponse> | Promise<Nullable<ListAssetsResponse>>;
+    listAssetsClasses(listAssetsClassesRequest: ListAssetsClassesRequest): Nullable<ListAssetsClassesResponse> | Promise<Nullable<ListAssetsClassesResponse>>;
+    getUserPortfolio(getUserPortfolioRequest?: Nullable<GetUserPortfolioRequest>): GetUserPortfolioResponse | Promise<GetUserPortfolioResponse>;
+    getPortfolioInvestedAmount(getPortfolioInvestedAmountRequest?: Nullable<GetPortfolioInvestedAmountRequest>): GetPortfolioInvestedAmountResponse | Promise<GetPortfolioInvestedAmountResponse>;
+    getPortfolioVariation(getPortfolioVariationRequest?: Nullable<GetPortfolioVariationRequest>): GetPortfolioVariationResponse | Promise<GetPortfolioVariationResponse>;
 }
 
-export class Industry {
+export interface Industry {
     id: string;
     name: string;
 }
 
-export class Sector {
+export interface Sector {
     id: string;
     name: string;
 }
 
-export class Exchange {
+export interface Exchange {
     id: string;
     name: string;
 }
 
-export class AssetClass {
+export interface AssetClass {
     id: string;
     name: string;
 }
 
-export class Asset {
+export interface Asset {
     id: string;
     symbol: string;
     class: AssetClass;
@@ -99,35 +95,32 @@ export class Asset {
     currency: Currency;
 }
 
-export class ListAssetsResponse {
+export interface ListAssetsResponse {
     assets: Nullable<Asset>[];
 }
 
-export class ListAssetsClassesResponse {
+export interface ListAssetsClassesResponse {
     assetClasses: Nullable<AssetClass>[];
 }
 
-export abstract class IMutation {
-    abstract login(loginRequest: LoginRequest): LoginResponse | Promise<LoginResponse>;
-
-    abstract createPortfolio(): boolean | Promise<boolean>;
-
-    abstract registerTransaction(registerTransactionRequest?: Nullable<RegisterTransactionRequest>): boolean | Promise<boolean>;
-
-    abstract signUp(signUpRequest: SignUpRequest): SignUpResponse | Promise<SignUpResponse>;
+export interface IMutation {
+    login(loginRequest: LoginRequest): LoginResponse | Promise<LoginResponse>;
+    createPortfolio(): boolean | Promise<boolean>;
+    registerTransaction(registerTransactionRequest?: Nullable<RegisterTransactionRequest>): boolean | Promise<boolean>;
+    signUp(signUpRequest: SignUpRequest): SignUpResponse | Promise<SignUpResponse>;
 }
 
-export class LoginResponse {
+export interface LoginResponse {
     token: string;
 }
 
-export class Currency {
+export interface Currency {
     id: string;
     name: string;
     symbol: string;
 }
 
-export class PortfolioAsset {
+export interface PortfolioAsset {
     id: string;
     symbol: string;
     className: string;
@@ -137,25 +130,25 @@ export class PortfolioAsset {
     currentPrice?: Nullable<number>;
 }
 
-export class Portfolio {
+export interface Portfolio {
     assets: PortfolioAsset[];
     portfolioId: string;
 }
 
-export class GetUserPortfolioResponse {
+export interface GetUserPortfolioResponse {
     portfolio: Portfolio;
 }
 
-export class GetPortfolioInvestedAmountResponse {
+export interface GetPortfolioInvestedAmountResponse {
     totalInvestedAmount: number;
 }
 
-export class GetPortfolioVariationResponse {
+export interface GetPortfolioVariationResponse {
     valueVariation: number;
     percentageVariation: number;
 }
 
-export class Transaction {
+export interface Transaction {
     asset: Asset;
     price: number;
     quantity: number;
@@ -163,7 +156,7 @@ export class Transaction {
     type: TransactionType;
 }
 
-export class SignUpResponse {
+export interface SignUpResponse {
     token: string;
 }
 

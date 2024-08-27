@@ -3,8 +3,6 @@ import { JwtService } from '@nestjs/jwt';
 import { CommonAuthService } from 'src/infra/core/common-auth/common-auth.service';
 import { UnauthorizedException } from '@nestjs/common';
 
-export const ILoginUseCaseToken = Symbol('ILoginUseCase');
-
 export interface ILoginUseCase {
   execute(dto: LoginDto): Promise<{ accessToken: string }>;
 }

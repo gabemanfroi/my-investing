@@ -4,14 +4,15 @@ import { TransactionsMappers } from 'src/modules/transactions/transactions.mappe
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from 'src/infra/guards/gql.auth.guard';
 import { RegisterTransactionRequest } from 'src/graphql';
+import { MUTATIONS } from 'src/infra/core/constants/mutations';
 
 @Resolver('Transactions')
 export class TransactionsResolvers {
   constructor(private readonly operationsService: TransactionsService) {}
 
-  @Mutation('registerTransaction')
+  @Mutation(MUTATIONS.REGISTER_TRANSACTION)
   @UseGuards(GqlAuthGuard)
-  async registerOperation(
+  async registerTransaction(
     @Args('registerTransactionInput')
     registerOperationInput: RegisterTransactionRequest,
   ) {

@@ -3,7 +3,7 @@ import { Asset, AssetClass } from 'src/domain/entity/asset.entity';
 export const ASSETS_REPOSITORY = 'ASSETS_REPOSITORY';
 export const ASSETS_CLASS_REPOSITORY = 'ASSETS_CLASS_REPOSITORY';
 
-export const assetsProviders = [
+const repositoryProviders = [
   {
     provide: ASSETS_REPOSITORY,
     useValue: Asset,
@@ -13,3 +13,5 @@ export const assetsProviders = [
     useValue: AssetClass,
   },
 ];
+
+export const assetsProviders = [...repositoryProviders];

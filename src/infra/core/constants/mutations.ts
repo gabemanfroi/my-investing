@@ -3,4 +3,5 @@ export const MUTATIONS = {
   LOGIN: 'login',
   REGISTER_OPERATION: 'registerOperation',
   CREATE_PORTFOLIO: 'createPortfolio',
+  REGISTER_TRANSACTION: 'registerTransaction',
 };

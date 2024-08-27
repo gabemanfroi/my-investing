@@ -46,7 +46,7 @@ describe('OperationsResolvers', () => {
         expectedResult,
       );
 
-      const result = await resolver.registerOperation(input);
+      const result = await resolver.registerTransaction(input);
 
       expect(operationsService.registerOperation).toHaveBeenCalledWith(input);
       expect(result).toEqual(expectedResult);
@@ -67,7 +67,7 @@ describe('OperationsResolvers', () => {
         new Error('Test error'),
       );
 
-      await expect(resolver.registerOperation(input)).rejects.toThrow(
+      await expect(resolver.registerTransaction(input)).rejects.toThrow(
         'Test error',
       );
     });

@@ -4,14 +4,14 @@ import { LoginDto } from 'src/domain/dto/auth/login.dto';
 import { MUTATIONS } from 'src/infra/core/constants/mutations';
 import {
   ILoginUseCase,
-  ILoginUseCaseToken,
+  LOGIN_USE_CASE,
 } from 'src/application/useCases/auth/login.use-case';
 import { Inject } from '@nestjs/common';
 
 @Resolver('Auth')
 export class AuthResolvers {
   constructor(
-    @Inject(ILoginUseCaseToken)
+    @Inject(LOGIN_USE_CASE)
     private readonly loginUseCase: ILoginUseCase,
   ) {}
 
