@@ -6,7 +6,7 @@ import { PORTFOLIOS_REPOSITORY } from 'src/infra/providers/portfolios/portfolios
 import {
   IStockMarketService,
   STOCK_MARKET_SERVICE,
-} from 'src/modules/stock-market/interfaces/stock-market.service';
+} from 'src/infra/stock-market/interfaces/stock-market.service';
 import { ReadPortfolioDto } from 'src/domain/dto/portfolios/read-portfolio.dto';
 import { IGetPortfolioVariationUseCase } from 'src/domain/interfaces/use-cases/portfolios/get-portfolio-variation.use-case.interface';
 

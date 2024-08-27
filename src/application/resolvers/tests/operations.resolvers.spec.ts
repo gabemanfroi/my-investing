@@ -1,18 +1,18 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TransactionsResolvers } from 'src/application/resolvers/transactions.resolvers';
-import { TransactionsService } from 'src/modules/transactions/transactions.service';
+import { RegisterTransactionUseCase } from 'src/modules/transactions/register-transaction-use-case.service';
 import { RegisterTransactionRequest, TransactionType } from 'src/graphql';
 
 describe('OperationsResolvers', () => {
   let resolver: TransactionsResolvers;
-  let operationsService: TransactionsService;
+  let operationsService: RegisterTransactionUseCase;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         TransactionsResolvers,
         {
-          provide: TransactionsService,
+          provide: RegisterTransactionUseCase,
           useValue: {
             registerOperation: jest.fn(), // Mocking the registerOperation method
           },
@@ -21,7 +21,9 @@ describe('OperationsResolvers', () => {
     }).compile();
 
     resolver = module.get<TransactionsResolvers>(TransactionsResolvers);
-    operationsService = module.get<TransactionsService>(TransactionsService);
+    operationsService = module.get<RegisterTransactionUseCase>(
+      RegisterTransactionUseCase,
+    );
   });
 
   it('should be defined', () => {
@@ -42,13 +44,13 @@ describe('OperationsResolvers', () => {
 
       const expectedResult = { id: 1, ...input.transaction }; // Assuming the service returns this
 
-      (operationsService.registerOperation as jest.Mock).mockResolvedValue(
+      (operationsService.registerTransaction as jest.Mock).mockResolvedValue(
         expectedResult,
       );
 
       const result = await resolver.registerTransaction(input);
 
-      expect(operationsService.registerOperation).toHaveBeenCalledWith(input);
+      expect(operationsService.registerTransaction).toHaveBeenCalledWith(input);
       expect(result).toEqual(expectedResult);
     });
 
@@ -63,7 +65,7 @@ describe('OperationsResolvers', () => {
         portfolioId: '1',
       };
 
-      (operationsService.registerOperation as jest.Mock).mockRejectedValue(
+      (operationsService.registerTransaction as jest.Mock).mockRejectedValue(
         new Error('Test error'),
       );
 

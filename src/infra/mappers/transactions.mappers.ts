@@ -1,12 +1,12 @@
-import { CreateTransactionDto } from 'src/domain/dto/transactions/create-transaction.dto';
+import { RegisterTransactionDto } from 'src/domain/dto/transactions/register-transaction.dto';
 import { plainToInstance } from 'class-transformer';
 import { RegisterTransactionRequest } from 'src/graphql';
 
 export class TransactionsMappers {
   static fromRegisterOperationInputToOperation(
     registerOperationInput: RegisterTransactionRequest,
-  ): CreateTransactionDto {
-    return plainToInstance(CreateTransactionDto, {
+  ): RegisterTransactionDto {
+    return plainToInstance(RegisterTransactionDto, {
       assetId: Number(registerOperationInput.transaction.assetId),
       type: registerOperationInput.transaction.type,
       price: registerOperationInput.transaction.price,

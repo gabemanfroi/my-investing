@@ -1,5 +1,4 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { PortfoliosService } from 'src/modules/portfolios/portfolios.service';
 import {
   GetPortfolioInvestedAmountRequest,
   GetPortfolioInvestedAmountResponse,
@@ -23,7 +22,7 @@ import {
 import {
   GET_PORTFOLIO_VARIATION_USE_CASE,
   IGetPortfolioVariationUseCase,
-} from 'src/application/useCases/portfolios/get-portfolio-variation.use-case';
+} from 'src/domain/interfaces/use-cases/portfolios/get-portfolio-variation.use-case.interface';
 
 @Resolver('Portfolios')
 export class PortfoliosResolver {
@@ -34,7 +33,6 @@ export class PortfoliosResolver {
     private readonly getPortfolioInvestedAmountUseCase: IGetPortfolioInvestedAmountUseCase,
     @Inject(GET_PORTFOLIO_VARIATION_USE_CASE)
     private readonly getPortfolioVariationUseCase: IGetPortfolioVariationUseCase,
-    private readonly portfolioService: PortfoliosService,
   ) {}
 
   @Query(QUERIES.GET_USER_PORTFOLIO)

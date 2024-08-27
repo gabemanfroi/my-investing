@@ -1,7 +1,7 @@
 import { IsEnum, IsNumber } from 'class-validator';
 import { TransactionType } from 'src/domain/entity/transaction.entity';
 
-export class CreateTransactionDto {
+export class RegisterTransactionDto {
   @IsNumber()
   portfolioId: number;
 

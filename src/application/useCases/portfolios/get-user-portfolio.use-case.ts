@@ -7,7 +7,7 @@ import { Portfolio } from 'src/domain/entity/portfolio.entity';
 import {
   IStockMarketService,
   STOCK_MARKET_SERVICE,
-} from 'src/modules/stock-market/interfaces/stock-market.service';
+} from 'src/infra/stock-market/interfaces/stock-market.service';
 import { PORTFOLIOS_REPOSITORY } from 'src/infra/providers/portfolios/portfolios.repositories.providers';
 
 @Injectable()

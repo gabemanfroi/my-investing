@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { IStockMarketService } from 'src/modules/stock-market/interfaces/stock-market.service';
+import { IStockMarketService } from 'src/infra/stock-market/interfaces/stock-market.service';
 import { HttpService } from '@nestjs/axios';
 import { map } from 'rxjs';
 import { AppConfigService } from 'src/infra/config/app-config.service';

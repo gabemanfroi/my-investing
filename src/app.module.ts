@@ -7,7 +7,7 @@ import { AssetsModule } from 'src/infra/modules/assets.module';
 import { UsersModule } from 'src/infra/modules/users.module';
 import { PortfoliosModule } from 'src/infra/modules/portfolios.module';
 import { TransactionsModule } from 'src/infra/modules/transactions.module';
-import { StockMarketModule } from './modules/stock-market/stock-market.module';
+import { StockMarketModule } from './infra/stock-market/stock-market.module';
 import { AppConfigModule } from 'src/infra/config/app-config.module';
 import { AuthModule } from 'src/infra/modules/auth.module';
 import { CommonAuthModule } from 'src/infra/core/common-auth/common-auth.module';
