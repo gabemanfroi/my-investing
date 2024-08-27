@@ -1,18 +1,21 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { AssetsService } from 'src/modules/assets/assets.service';
-import { ListAssetsClassesRequest, ListAssetsRequest } from 'src/graphql';
-import { ReadAssetClassDto } from 'src/domain/dto/assets/read-asset-class.dto';
+import { ListAssetsRequest } from 'src/graphql';
 import { ReadAssetDto } from 'src/domain/dto/assets/read-asset.dto';
-import { ListAssetsUseCase } from 'src/application/useCases/assets/list-assets.use-case';
+import { Inject } from '@nestjs/common';
+import {
+  IListAssetsUseCase,
+  LIST_ASSETS_USE_CASE,
+} from 'src/domain/interfaces/use-cases/assets/list-assets.use-case.interface';
+import { QUERIES } from 'src/infra/core/constants/queries';
 
 @Resolver('Assets')
 export class AssetsResolvers {
   constructor(
-    private readonly assetsService: AssetsService,
-    private readonly listAssetsUseCase: ListAssetsUseCase,
+    @Inject(LIST_ASSETS_USE_CASE)
+    private readonly listAssetsUseCase: IListAssetsUseCase,
   ) {}
 
-  @Query('listAssets')
+  @Query(QUERIES.LIST_ASSETS)
   async listAssets(
     @Args('listAssetsRequest') listAssetsRequest: ListAssetsRequest,
   ) {
@@ -21,17 +24,5 @@ export class AssetsResolvers {
     );
 
     return ReadAssetDto.toListAssetsResponse(assets);
-  }
-
-  @Query('listAssetsClasses')
-  async listAssetsClasses(
-    @Args('listAssetsClassesRequest')
-    listAssetsClassesRequest: ListAssetsClassesRequest,
-  ) {
-    const classes = await this.assetsService.listAssetsClasses(
-      listAssetsClassesRequest.query,
-    );
-
-    return ReadAssetClassDto.toListAssetsClassesResponse(classes);
   }
 }

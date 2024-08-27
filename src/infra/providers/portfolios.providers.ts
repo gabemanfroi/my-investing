@@ -1,10 +1,10 @@
 import { Portfolio } from 'src/domain/entity/portfolio.entity';
 
-const PortfoliosRepositoryToken = 'PORTFOLIOS_REPOSITORY';
+const PORTFOLIOS_REPOSITORY = 'PORTFOLIOS_REPOSITORY';
 
 export const portfoliosProviders = [
   {
-    provide: PortfoliosRepositoryToken,
+    provide: PORTFOLIOS_REPOSITORY,
     useValue: Portfolio,
   },
 ];

@@ -2,11 +2,8 @@ import { Inject, Injectable } from '@nestjs/common';
 import { Asset, AssetClass } from 'src/domain/entity/asset.entity';
 import { ReadAssetDto } from 'src/domain/dto/assets/read-asset.dto';
 import { Op } from 'sequelize';
-import { ASSETS_REPOSITORY } from 'src/infra/providers/assets.providers';
-
-export interface IListAssetsUseCase {
-  execute(query: string): Promise<ReadAssetDto[]>;
-}
+import { IListAssetsUseCase } from 'src/domain/interfaces/use-cases/assets/list-assets.use-case.interface';
+import { ASSETS_REPOSITORY } from 'src/infra/providers/assets/assets.repository.providers';
 
 @Injectable()
 export class ListAssetsUseCase implements IListAssetsUseCase {

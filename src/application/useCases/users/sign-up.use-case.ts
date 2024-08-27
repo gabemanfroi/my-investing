@@ -1,14 +1,11 @@
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { SignUpDto } from 'src/domain/dto/users/sign-up.dto';
 import { hash } from 'bcrypt';
-import { USER_REPOSITORY } from 'src/infra/providers/users.providers';
 import { User } from 'src/domain/entity/user.entity';
 import { JwtService } from '@nestjs/jwt';
 import { EventEmitter2 } from '@nestjs/event-emitter';
-
-export interface ISignUpUseCase {
-  execute(dto: SignUpDto): Promise<{ accessToken: string }>;
-}
+import { ISignUpUseCase } from 'src/domain/interfaces/use-cases/users/sign-up.use-case.interface';
+import { USER_REPOSITORY } from 'src/infra/providers/users/user.repository.providers';
 
 @Injectable()
 export class SignUpUseCase implements ISignUpUseCase {

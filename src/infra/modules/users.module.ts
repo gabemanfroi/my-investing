@@ -1,11 +1,10 @@
 import { Module } from '@nestjs/common';
-import { usersProviders } from 'src/infra/providers/users.providers';
 import { JwtModule } from '@nestjs/jwt';
 import { AppConfigModule } from 'src/infra/config/app-config.module';
 import { AppConfigService } from 'src/infra/config/app-config.service';
-import { UsersService } from 'src/modules/users/users.service';
 import { UsersResolvers } from 'src/application/resolvers/users.resolvers';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { usersProviders } from 'src/infra/providers/users';
 
 @Module({
   imports: [
@@ -20,7 +19,7 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
       },
     }),
   ],
-  exports: [...usersProviders, UsersService, UsersResolvers],
-  providers: [...usersProviders, UsersService, UsersResolvers],
+  exports: [...usersProviders, UsersResolvers],
+  providers: [...usersProviders, UsersResolvers],
 })
 export class UsersModule {}
