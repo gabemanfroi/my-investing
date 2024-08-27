@@ -1,4 +1,4 @@
-import { repositoryProviders } from 'src/infra/providers/assets/assets.repository.providers';
 import { useCasesProviders } from 'src/infra/providers/assets/assets.use-cases.providers';
+import { repositoriesProviders } from 'src/infra/providers/assets/assets.repositories.providers';
 
-export const assetsProviders = [...repositoryProviders, ...useCasesProviders];
+export const assetsProviders = [...repositoriesProviders, ...useCasesProviders];

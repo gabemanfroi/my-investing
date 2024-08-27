@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { StockMarketService } from 'src/modules/stock-market/interfaces/stock-market.service';
+import { IStockMarketService } from 'src/modules/stock-market/interfaces/stock-market.service';
 import { HttpService } from '@nestjs/axios';
 import { map } from 'rxjs';
 import { AppConfigService } from 'src/infra/config/app-config.service';
@@ -30,7 +30,7 @@ interface BrapiQuoteResponse {
 }
 
 @Injectable()
-export class StockMarketBrapiService implements StockMarketService {
+export class StockMarketBrapiService implements IStockMarketService {
   constructor(
     private readonly httpService: HttpService,
     private readonly appConfigService: AppConfigService,

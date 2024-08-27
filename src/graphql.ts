@@ -104,7 +104,6 @@ export interface ListAssetsClassesResponse {
 
 export interface IMutation {
     login(loginRequest: LoginRequest): LoginResponse | Promise<LoginResponse>;
-    createPortfolio(): boolean | Promise<boolean>;
     registerTransaction(registerTransactionRequest?: Nullable<RegisterTransactionRequest>): boolean | Promise<boolean>;
     signUp(signUpRequest: SignUpRequest): SignUpResponse | Promise<SignUpResponse>;
 }

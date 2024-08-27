@@ -3,7 +3,7 @@ import { Asset, AssetClass } from 'src/domain/entity/asset.entity';
 import { ReadAssetDto } from 'src/domain/dto/assets/read-asset.dto';
 import { Op } from 'sequelize';
 import { IListAssetsUseCase } from 'src/domain/interfaces/use-cases/assets/list-assets.use-case.interface';
-import { ASSETS_REPOSITORY } from 'src/infra/providers/assets/assets.repository.providers';
+import { ASSETS_REPOSITORY } from 'src/infra/providers/assets/assets.repositories.providers';
 
 @Injectable()
 export class ListAssetsUseCase implements IListAssetsUseCase {

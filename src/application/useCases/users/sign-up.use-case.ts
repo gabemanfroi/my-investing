@@ -5,7 +5,7 @@ import { User } from 'src/domain/entity/user.entity';
 import { JwtService } from '@nestjs/jwt';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { ISignUpUseCase } from 'src/domain/interfaces/use-cases/users/sign-up.use-case.interface';
-import { USER_REPOSITORY } from 'src/infra/providers/users/user.repository.providers';
+import { USER_REPOSITORY } from 'src/infra/providers/users/user.repositories.providers';
 
 @Injectable()
 export class SignUpUseCase implements ISignUpUseCase {

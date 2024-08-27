@@ -1,4 +1,4 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Query, Resolver } from '@nestjs/graphql';
 import { PortfoliosService } from 'src/modules/portfolios/portfolios.service';
 import {
   GetPortfolioInvestedAmountRequest,
@@ -9,16 +9,21 @@ import {
   GetUserPortfolioResponse,
 } from 'src/graphql';
 import { ReadPortfolioDto } from 'src/domain/dto/portfolios/read-portfolio.dto';
-import { CurrentUser } from 'src/infra/decorators/current-user.decorator';
-import { User } from 'src/domain/entity/user.entity';
-import { UseGuards } from '@nestjs/common';
+import { Inject, UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from 'src/infra/guards/gql.auth.guard';
 import { QUERIES } from 'src/infra/core/constants/queries';
-import { MUTATIONS } from 'src/infra/core/constants/mutations';
+import {
+  GET_USER_PORTFOLIO_USE_CASE,
+  IGetUserPortfolioUseCase,
+} from 'src/domain/interfaces/use-cases/portfolios/get-user-portfolio.use-case.interface';
 
 @Resolver('Portfolios')
 export class PortfoliosResolver {
-  constructor(private readonly portfolioService: PortfoliosService) {}
+  constructor(
+    @Inject(GET_USER_PORTFOLIO_USE_CASE)
+    private readonly getUserPortfolioUseCase: IGetUserPortfolioUseCase,
+    private readonly portfolioService: PortfoliosService,
+  ) {}
 
   @Query(QUERIES.GET_USER_PORTFOLIO)
   @UseGuards(GqlAuthGuard)
@@ -26,7 +31,7 @@ export class PortfoliosResolver {
     @Args('getUserPortfolioRequest')
     request: GetUserPortfolioRequest,
   ): Promise<GetUserPortfolioResponse> {
-    const response = await this.portfolioService.getUserPortfolio(
+    const response = await this.getUserPortfolioUseCase.execute(
       Number(request.userId),
     );
 
@@ -54,12 +59,5 @@ export class PortfoliosResolver {
     request: GetPortfolioVariationRequest,
   ): Promise<GetPortfolioVariationResponse> {
     return this.portfolioService.getPortfolioVariation(request.portfolioId);
-  }
-
-  @Mutation(MUTATIONS.CREATE_PORTFOLIO)
-  @UseGuards(GqlAuthGuard)
-  async createPortfolio(@CurrentUser() user: User) {
-    return null;
-    return this.portfolioService.createPortfolio(user.id);
   }
 }

@@ -4,4 +4,4 @@ export const MUTATIONS = {
   REGISTER_OPERATION: 'registerOperation',
   CREATE_PORTFOLIO: 'createPortfolio',
   REGISTER_TRANSACTION: 'registerTransaction',
-};
+} as const;

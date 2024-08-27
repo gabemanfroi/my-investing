@@ -1,8 +1,8 @@
 import { Portfolio } from 'src/domain/entity/portfolio.entity';
 
-const PORTFOLIOS_REPOSITORY = 'PORTFOLIOS_REPOSITORY';
+export const PORTFOLIOS_REPOSITORY = 'PORTFOLIOS_REPOSITORY';
 
-export const portfoliosProviders = [
+export const repositoriesProviders = [
   {
     provide: PORTFOLIOS_REPOSITORY,
     useValue: Portfolio,

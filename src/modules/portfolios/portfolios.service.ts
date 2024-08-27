@@ -3,7 +3,7 @@ import { Sequelize } from 'sequelize-typescript';
 import { ReadPortfolioDto } from 'src/domain/dto/portfolios/read-portfolio.dto';
 import { Portfolio } from 'src/domain/entity/portfolio.entity';
 import { Asset, AssetClass } from 'src/domain/entity/asset.entity';
-import { StockMarketService } from 'src/modules/stock-market/interfaces/stock-market.service';
+import { IStockMarketService } from 'src/modules/stock-market/interfaces/stock-market.service';
 import { OnEvent } from '@nestjs/event-emitter';
 import { User } from 'src/domain/entity/user.entity';
 import { Transaction } from 'src/domain/entity/transaction.entity';
@@ -16,42 +16,12 @@ export class PortfoliosService {
     @Inject('SEQUELIZE')
     private readonly sequelize: Sequelize,
     @Inject('StockMarketService')
-    private readonly stockMarketService: StockMarketService,
+    private readonly stockMarketService: IStockMarketService,
   ) {}
 
   @OnEvent('user.created')
   async handleUserCreatedEvent(user: User) {
     return this.createPortfolio(user.id);
-  }
-
-  async getUserPortfolio(userId: number): Promise<ReadPortfolioDto> {
-    const portfolio = await this.portfoliosRepository.findOne({
-      where: { userId },
-      include: [
-        {
-          model: Transaction,
-          include: [{ model: Asset, include: [AssetClass] }],
-        },
-      ],
-    });
-
-    const mappedPortfolio = ReadPortfolioDto.fromModel(portfolio);
-
-    const assetsWithCurrentPrices = await Promise.all(
-      mappedPortfolio.assets.map(async (asset) => {
-        const currentPrice = await this.stockMarketService.getStockPrice(
-          asset.symbol,
-        );
-        return {
-          ...asset,
-          currentPrice,
-        };
-      }),
-    );
-    return {
-      ...mappedPortfolio,
-      assets: assetsWithCurrentPrices,
-    };
   }
 
   async createPortfolio(userId: number) {
