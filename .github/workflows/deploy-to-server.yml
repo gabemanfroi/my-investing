@@ -15,11 +15,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install
+          yarn install
 
       - name: Run tests
         run: |
-          npm test
+          yarn test
 
       - name: Trigger server build
         if: success()
