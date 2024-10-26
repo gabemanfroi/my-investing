@@ -1,22 +1,19 @@
 version: '3.8'
 services:
   nest-app:
-    image: node:22-alpine
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: nest-app
-    command: sh -c "yarn install && yarn run start:dev"
-    working_dir: /app
-    volumes:
-      - ./:/app
-      - /app/node_modules
     ports:
-      - "3000:3000"
+      - "${APP_PORT}:${APP_PORT}"
     environment:
-      - NODE_ENV=development
-      - DATABASE_HOST=timescaledb
-      - DATABASE_PORT=5432
-      - DATABASE_USER=postgres
-      - DATABASE_PASSWORD=postgres
-      - DATABASE_NAME=nest_db
+      - NODE_ENV=${NODE_ENV}
+      - DATABASE_HOST=${DATABASE_HOST}
+      - DATABASE_PORT=${DATABASE_PORT}
+      - DATABASE_USER=${DATABASE_USER}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - DATABASE_NAME=${DATABASE_NAME}
     depends_on:
       - timescaledb
 
@@ -24,11 +21,11 @@ services:
     image: timescale/timescaledb:latest-pg16
     container_name: timescaledb
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: nest_db
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_DB=${DATABASE_NAME}
     ports:
-      - "5432:5432"
+      - "${DATABASE_PORT}:${DATABASE_PORT}"
     volumes:
       - timescale-data:/var/lib/postgresql/data
 
