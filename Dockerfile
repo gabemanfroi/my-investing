@@ -1,5 +1,5 @@
-# Use the base image
-FROM node:22-alpine
+# Use ARM-compatible base image
+FROM arm32v7/node:22-alpine
 
 # Set the working directory
 WORKDIR /app
@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package.json yarn.lock ./
 
 # Install dependencies
-RUN yarn install
+RUN yarn install --frozen-lockfile
 
 # Copy the entire application code
 COPY . .
